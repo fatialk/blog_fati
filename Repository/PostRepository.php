@@ -15,5 +15,15 @@ class PostRepository extends ParentRepository {
 
           return $rows;
      }
+
+     public function getOnePostById(int $id)
+     {
+          $this->connect('blog_fati');
+          $result = $this->conn->query("select * from post where id=".$id);
+          $this->close();
+          
+
+          return $result->fetch_assoc();
+     }
 }
 ?>

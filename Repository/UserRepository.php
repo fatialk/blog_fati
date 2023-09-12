@@ -16,14 +16,14 @@ class UserRepository extends ParentRepository {
           return $rows;
      }
 
-     public function getOneUser(int $userId)
+     public function getOneUserByPostId(int $id)
      {
           $this->connect('blog_fati');
-          $result = $this->conn->query("select * from user where id=".$userId);
+          $result = $this->conn->query("select name, image from user where id=".$id);
           $this->close();
           
 
-          return $result->fetch_row();
+          return $result->fetch_assoc();
      }
 }
 ?>

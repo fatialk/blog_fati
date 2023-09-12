@@ -11,7 +11,17 @@ $viewDir = '/Views/';
 switch ($request) {
     case '/posts':
             $postController = new PostController();
-            $postController->getPostsAction();
+            $postController->getListAction();
+        break;
+
+    case '/posts/1':
+            $postController = new PostController();
+            $postController->getOneAction(1);
+        break;
+
+    case '/posts/3':
+            $postController = new PostController();
+            $postController->getOneAction(3);
         break;
 
     default:

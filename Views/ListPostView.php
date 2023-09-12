@@ -29,7 +29,7 @@
         </div>
         
         <div class="logo">
-            <img class="logo-mini" src="assets/image_blog.jpg"  alt="logo">
+            <img class="logo-mini" src="../assets/image_blog.jpg"  alt="logo">
         </div>
     </header>
     <div class="container-fluid">
