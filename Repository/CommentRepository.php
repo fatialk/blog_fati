@@ -15,5 +15,14 @@ class CommentRepository extends ParentRepository {
 
           return $rows;
      }
+
+     public function createComment(int $userId, int $postId, string $description)
+     {
+          $this->connect('blog_fati');
+          $result = $this->conn->query("INSERT INTO comment (user_id, post_id, description) VALUES ('$userId', '$postId', '$description')");
+          $this->close();
+
+          return true;
+     }
 }
 ?>
