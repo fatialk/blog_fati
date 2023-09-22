@@ -29,16 +29,13 @@
         </div>
         
         <div class="logo">
-            <img class="logo-mini" src="assets/image_blog.jpg"  alt="logo">
+            <img class="logo-mini" src="../assets/image_blog.jpg"  alt="logo">
         </div>
     </header>
     <?php
             $post= $_SESSION['post'];
             $comments = $_SESSION['comments'];
             $user = $_SESSION['user'];
-            var_dump($post);
-            var_dump($comments);
-            var_dump($user);
             echo '
     <div class="container-fluid">
         <main class="tm-main">
@@ -79,12 +76,12 @@
                         <div>
                             <h2 class="tm-color-primary tm-post-title">Comments</h2>
                             <hr class="tm-hr-primary tm-mb-45">';
-foreach ($comments as $comment ){
+foreach ($comments as $comment) {
                            echo' <!-- debut 1st comment -->
                             <div class="tm-comment tm-mb-45">
                                 <figure class="tm-comment-figure">
-                                    <img src="'.$user['image'].'">
-                                    <figcaption class="tm-color-primary text-center">'.$user['name'].'</figcaption>
+                                    <img class="user-image" src="'.$comment['user']['image'].'">
+                                    <figcaption class="tm-color-primary text-center">'.$comment['user']['name'].'</figcaption>
                                 </figure>
                                 <div>
                                     <p>
@@ -98,16 +95,14 @@ foreach ($comments as $comment ){
                             </div>
                             <!-- fin 1st comment -->';
                         }
-                            echo' <form action="" class="mb-5 tm-comment-form">
+                            echo' <form action="/comments/create" method="post" class="mb-5 tm-comment-form">
                                 <h2 class="tm-color-primary tm-post-title mb-4">Ajouter un commentaire</h2>
+                                
                                 <div class="mb-4">
-                                    <input class="form-control" name="name" type="text">
+                                    <input class="form-control" name="post_id" type="hiden" value="'.$post['id'].'">
                                 </div>
                                 <div class="mb-4">
-                                    <input class="form-control" name="email" type="text">
-                                </div>
-                                <div class="mb-4">
-                                    <textarea class="form-control" name="message" rows="6"></textarea>
+                                    <textarea class="form-control" name="description" rows="6"></textarea>
                                 </div>
                                 <div class="text-right">
                                     <button class="tm-btn tm-btn-primary tm-btn-small">Envoyer</button>                        

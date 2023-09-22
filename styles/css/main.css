@@ -295,6 +295,16 @@ header .menu input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-
 .about .about-center .description .cv {
   padding-left: 5px;
 }
+.post-image{
+  width: 40%;
+}
+.user-image{
+  width: 100px;
+}
+
+.create-post-hidden{
+  display: none;
+}
 
 footer {
   display: flex !important;
