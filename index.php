@@ -1,4 +1,5 @@
 <?php
+session_start();
 // On charge le fichier Autoloader
 require_once __DIR__ . '/Autoloader.php';
 App\Autoloader::register();
@@ -35,15 +36,32 @@ switch ($request) {
                         $commentController = new CommentController();
                         $commentController->createCommentAction();
                         break;
-
+                        
                         case '/users/create':
                             $userController = new UserController();
                             $userController->createUserAction();
                             break;
-                        
-                        default:
-                        http_response_code(404);
-                        require __DIR__ . $viewDir . '404.php';
-                    }
-                    
-                    ?>
+                            
+                            case '/auth':
+                                $userController = new UserController();
+                                $userController->authAction();
+                                break;
+
+                                case '/signIn':
+                                    require __DIR__ . $viewDir . 'SignIn.php';
+                                    break;
+                                    case '/signOut':
+                                        session_destroy();
+                                        header('location: /signIn');
+                                        break;
+
+                                        case '/register':
+                                            require __DIR__ . $viewDir . 'Register.php';
+                                            break;
+                                    
+                                    default:
+                                    http_response_code(404);
+                                    require __DIR__ . $viewDir . '404.php';
+                                }
+                                
+                                ?>
