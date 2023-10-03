@@ -71,13 +71,15 @@ hr {
 .add-post{
     display: flex;
     justify-content: end;
-    margin-right: 50px;
+   
 }
 .tm-site-logo i { color: #0CC; }
 
 .tm-main {
     /* margin-left: 400px; */
     padding: 80px 100px 25px;
+    display: flex;
+    flex-direction: column;
 }
 
 .tm-post { max-width: 470px; }
@@ -351,7 +353,7 @@ video {
     border-radius: 0;
 }
 
-.tm-comment-form { max-width: 360px; }
+/* .tm-comment-form { max-width: 360px; } */
 .tm-category-list { list-style-type: none; }
 figure { margin: 0; }
 figcaption { line-height: 1.4; }
@@ -368,7 +370,7 @@ figcaption { line-height: 1.4; }
 .tm-pt-30 { padding-top: 30px; }
 .tm-pt-45 { padding-top: 45px; }
 .tm-pt-60 { padding-top: 60px; }
-.tm-mb-40 { margin-bottom: 40px; }
+.tm-mb-40 { margin-bottom: 40px; width: 100%; max-height: 900px; }
 .tm-mb-45 { margin-bottom: 45px; }
 .tm-mb-55 { margin-bottom: 55px; }
 .tm-mb-60 { margin-bottom: 60px; }

@@ -19,7 +19,7 @@ class UserRepository extends ParentRepository {
      public function getOneUserById(int $id)
      {
           $this->connect('blog_fati');
-          $result = $this->conn->query("select name, image from user where id=".$id);
+          $result = $this->conn->query("select * from user where id=".$id);
           $this->close();
           
           
@@ -27,15 +27,24 @@ class UserRepository extends ParentRepository {
      }
      
      
-     public function createUser (int $postId, string $role, string $name, string $image, string $email, string $password) {
+     public function createUser (string $role, string $name, string $avatar, string $email, string $password) {
           
           
           $this->connect('blog_fati');
-          $result = $this->conn->query("INSERT INTO user (post_id, role, name, image, email, password) VALUES ('$postId', '$role', '$name', '$image', '$email', '$password')");
+          $result = $this->conn->query("INSERT INTO user (role, name, avatar, email, password) VALUES ('$role', '$name', '$avatar', '$email', '$password')");
+          $this->close();
+          
+          return true;
+     }
+
+     public function getOneUserByEmail(string $email)
+     {
+          $this->connect('blog_fati');
+          $result = $this->conn->query('select * from user where email="'.$email.'"');
           $this->close();
           
           
-          return true;
+          return $result->fetch_assoc();
      }
      
 }

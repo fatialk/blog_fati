@@ -1,3 +1,6 @@
+<?php
+$connected = (!empty($_SESSION['status']) && $_SESSION['status'] === 'connected');
+?>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -13,7 +16,7 @@
     <link href="../styles/css/templatemo-xtra-blog.css" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <!-- <header>
         <div class="menu">
             <div class="title">
                 <span>Fatima ALKHALLOUFI</span> - développeuse Fullstack junior
@@ -31,7 +34,30 @@
         <div class="logo">
             <img class="logo-mini" src="../assets/image_blog.jpg"  alt="logo">
         </div>
-    </header>
+    </header> -->
+    <header class="header">
+<!-- <div class="menu"> -->
+<?php
+if($connected)
+{
+    echo "<a class='sign-out-button tm-btn-primary tm-btn' href='/signOut'>Se déconnecter</a>";
+}
+?>
+<div class="title">
+<span>Bienvenue sur mon blog</span> - Fatima ALKHALLOUFI / Développeuse PHP-Symfony Junior
+<div class='space'>
+</div>
+</div>
+
+<input class="menu-btn" type="checkbox" id="menu-btn" />
+  <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+  <ul class="menu">
+    <li><a href="#apropos">A propos</a></li>
+    <li><a class="active" href="#blog">Blog</a></li>
+    <li><a href="#mesprojets">Mes projets</a></li>
+
+</ul>
+</header>
     <?php
             $post= $_SESSION['post'];
             $comments = $_SESSION['comments'];
@@ -52,7 +78,7 @@
             </div>             -->
             
             <div class="row tm-row">
-                <div class="col-12">
+                <div class="col-12 one-post">
                     <hr class="tm-hr-primary tm-mb-55">
                     <!-- Video player 1422x800 -->
 
@@ -80,7 +106,7 @@ foreach ($comments as $comment) {
                            echo' <!-- debut 1st comment -->
                             <div class="tm-comment tm-mb-45">
                                 <figure class="tm-comment-figure">
-                                    <img class="user-image" src="'.$comment['user']['image'].'">
+                                    <img class="user-image" src="'.$comment['user']['avatar'].'">
                                     <figcaption class="tm-color-primary text-center">'.$comment['user']['name'].'</figcaption>
                                 </figure>
                                 <div>

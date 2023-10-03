@@ -28,7 +28,6 @@ button {
   justify-content: center;
   align-items: center;
   background: white;
-  height: 100vh;
 }
 .main .accueil {
   display: flex;
@@ -86,7 +85,6 @@ button {
   box-shadow: 0 0 1em #e6e9f9;
   padding: 1em;
   display: flex;
-  flex-direction: column;
   gap: 0.5em;
   border-radius: 20px;
   color: #4d4d4d;
@@ -132,6 +130,147 @@ button {
   color: hsl(10deg, 99%, 50%);
 }
 
+/* header */
+
+.header {
+  background-color: #fff;
+  box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-out-button {
+  margin: 35px;
+  display:flex;
+  align-self:end;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #fff;
+  align-self: end;
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px;
+  border-right: 1px solid #f4f4f4;
+  text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: #f4f4f4;
+}
+
+.header .logo {
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+/* menu */
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+  cursor: pointer;
+  display: block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+
+.header .menu-icon .navicon {
+  background: #333;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: #333;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 240px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 30px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
+}
+
+/* 
 header {
   display: flex !important;
   justify-content: space-around;
@@ -251,6 +390,16 @@ header .menu input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-
   box-sizing: border-box;
   transform: rotate(-135deg);
   margin-top: -9px;
+} */
+
+body {
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+  background-color: #f4f4f4;
+}
+
+a {
+  color: #000;
 }
 
 .about {
@@ -301,17 +450,36 @@ header .menu input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-
 .user-image{
   width: 100px;
 }
-
+.add-post{
+  display: flex;
+  align-self: end;
+}
 .create-post-hidden{
   display: none;
+}
+.one-post {
+  max-width: 100%;
+    align-self: center;
+}
+#hiden {
+  display: none;
+}
+
+.register-form{
+  margin: 50px 50px 50px 0px;
+
 }
 
 footer {
   display: flex !important;
+  
   justify-content: space-around;
   flex-direction: row;
   padding: 30px;
   background-color: #f3e0c8;
+}
+footer .coordonnees{
+  margin-right: 80px;
 }
 footer input[type=text], footer textarea, footer input[type=email] {
   width: 100%;
@@ -369,7 +537,9 @@ footer ul {
 footer ul li {
   margin-bottom: 15px;
 }
-
+footer .contact{
+  padding: 0px !important;
+}
 @media screen and (max-width: 750px) {
   header {
     flex-direction: column;
@@ -394,3 +564,34 @@ footer ul li {
     font-size: 16px;
   }
 }/*# sourceMappingURL=main.css.map */
+
+
+@media (min-width: 280px){
+
+  .container-fluid {
+    padding-top: 345px;
+}
+}
+
+
+
+@media (min-width: 582px){
+
+  .container-fluid {
+    padding-top: 300px;
+}
+
+}
+@media (min-width: 992px){
+
+  .container-fluid {
+    padding-top: 270px;
+}
+}
+
+@media (max-width: 582px){
+
+  footer{
+    flex-direction: column;
+}
+}

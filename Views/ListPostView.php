@@ -1,3 +1,6 @@
+<?php
+$connected = (!empty($_SESSION['status']) && $_SESSION['status'] === 'connected');
+?>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -8,72 +11,71 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel='stylesheet' type='text/css' href='../styles/css/main.css' >
 <link href="../styles/css/bootstrap.min.css" rel="stylesheet">
 <link href="../styles/css/templatemo-xtra-blog.css" rel="stylesheet">
+<link rel='stylesheet' type='text/css' href='../styles/css/main.css' >
 </head>
 <body>
-<header>
-<div class="menu">
+<header class="header">
+<!-- <div class="menu"> -->
+<?php
+if($connected)
+{
+    echo "<a class='sign-out-button tm-btn-primary tm-btn' href='/signOut'>Se déconnecter</a>";
+}
+?>
 <div class="title">
-<span>Fatima ALKHALLOUFI</span> - développeuse Fullstack junior
-</div>
-<div id="sidebarMenu">
-<div class="main-content-wrapper">
-<a>Accueil</a>
-<a class="active">Blog</a>
-<a>Mes projets</a>
-<a>Déconnexion</a>
-</div>
+<span>Bienvenue sur mon blog</span> - Fatima ALKHALLOUFI / Développeuse PHP-Symfony Junior
+<div class='space'>
 </div>
 </div>
 
-<div class="logo">
-<img class="logo-mini" src="../assets/image_blog.jpg"  alt="logo">
-</div>
+<input class="menu-btn" type="checkbox" id="menu-btn" />
+  <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+  <ul class="menu">
+    <li><a href="#apropos">A propos</a></li>
+    <li><a class="active" href="#blog">Blog</a></li>
+    <li><a href="#mesprojets">Mes projets</a></li>
+
+</ul>
 </header>
 <div class="container-fluid">
-<main class="tm-main">
-<!-- Search form -->
-
-<!-- <div class="row tm-row">
-<div class="col-12">
-<form method="GET" class="form-inline tm-mb-80 tm-search-form">                
-<input class="form-control tm-search-input" name="query" type="text" placeholder="Rechercher..." aria-label="Search">
-<button class="tm-search-button" type="submit">
-<i class="fas fa-search tm-search-icon" aria-hidden="true"></i>
-</button>                                
-</form>
-</div>                
-</div>   -->
 <?php
 $posts = $_SESSION['posts'];
-echo' <button class="add-post tm-btn tm-btn-primary ">Ajouter un post</button>
-<div class="create-post-hidden">
-<form action="/posts/create" method="post" class="mb-5 tm-comment-form">
-<h2 class="tm-color-primary tm-post-title mb-4">Ajouter un commentaire</h2>
+if($connected){
+    echo' <button class="add-post tm-btn tm-btn-primary">Ajouter un post</button>
+    <div class="create-post-hidden">
+    <form action="/posts/create" method="post" class="mb-5 tm-comment-form">
+    
+    <div id="hiden" class="mb-4">
+    <input class="form-control" name="post_id" type="hiden" value="'.$post['id'].'">
+    </div>
+    <label for="title">Titre</label>
+    <div class="mb-4">
+    <textarea class="form-control" name="title" rows="6"></textarea>
+    </div>
+    <label for="image">Image</label>
+    <div class="mb-4">
+    <textarea class="form-control" name="image" rows="6"></textarea>
+    </div>
+    <label for="description">Description</label>
+    <div class="mb-4">
+    <textarea class="form-control" name="description" rows="6"></textarea>
+    </div>
+    <label for="category">Catégorie</label>
+    <div class="mb-4">
+    <textarea class="form-control" name="category" rows="6"></textarea>
+    </div>
+    <div class="text-right">
+    <button class="tm-btn tm-btn-primary tm-btn-small">Envoyer</button>                        
+    </div>                                
+    </form>  
+    </div>';
+}
+?>
+<main class="tm-main">
 
-<div class="mb-4">
-<input class="form-control" name="post_id" type="hiden" value="'.$post['id'].'">
-</div>
-<div class="mb-4">
-<textarea class="form-control" name="title" rows="6"></textarea>
-</div>
-<div class="mb-4">
-<textarea class="form-control" name="image" rows="6"></textarea>
-</div>
-<div class="mb-4">
-<textarea class="form-control" name="description" rows="6"></textarea>
-</div>
-<div class="mb-4">
-<textarea class="form-control" name="category" rows="6"></textarea>
-</div>
-<div class="text-right">
-<button class="tm-btn tm-btn-primary tm-btn-small">Envoyer</button>                        
-</div>                                
-</form>  
-</div> 
-<div class="row tm-row">'; ?>
+<div class="row tm-row">
 <?php
 foreach($posts as $post)
 {
@@ -126,7 +128,7 @@ foreach($posts as $post)
 </div>
 </div>
 <footer>
-<div class="col1">
+<div class="col1 coordonnees">
 <div class="fcol">
 <h1>Voir mes projets</h1>
 <nav>
@@ -150,7 +152,7 @@ foreach($posts as $post)
 </div>
 </div>
 <div class="fcol">
-<div class="container">
+<div class="container contact">
 <h1>Me contacter</h1>
 <form action="/action_page.php">
 <label for="fname">Nom & prénom</label>
