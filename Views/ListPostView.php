@@ -33,7 +33,7 @@ if($connected)
 <input class="menu-btn" type="checkbox" id="menu-btn" />
   <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
   <ul class="menu">
-    <li><a href="#apropos">A propos</a></li>
+    <li><a href="/home">Accueil</a></li>
     <li><a class="active" href="#blog">Blog</a></li>
     <li><a href="#mesprojets">Mes projets</a></li>
 

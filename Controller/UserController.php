@@ -55,7 +55,7 @@ class UserController{
         if(!empty($user) && $password === $user['password']) {
             $_SESSION['status'] = 'connected';
             $_SESSION['connected-user'] = $user;
-           header('Location: /posts/list');
+           header('Location: /home');
            exit();
         }
 
