@@ -36,42 +36,12 @@ if($connected)
     <li><a href="/home">Accueil</a></li>
     <li><a class="active" href="#blog">Blog</a></li>
     <li><a href="#mesprojets">Mes projets</a></li>
-
 </ul>
 </header>
 <div class="container-fluid">
 <?php
 $posts = $_SESSION['posts'];
-if($connected){
-    echo' <button class="add-post tm-btn tm-btn-primary">Ajouter un post</button>
-    <div class="create-post-hidden">
-    <form action="/posts/create" method="post" class="mb-5 tm-comment-form">
-    
-    <div id="hiden" class="mb-4">
-    <input class="form-control" name="post_id" type="hiden" value="'.$post['id'].'">
-    </div>
-    <label for="title">Titre</label>
-    <div class="mb-4">
-    <textarea class="form-control" name="title" rows="6"></textarea>
-    </div>
-    <label for="image">Image</label>
-    <div class="mb-4">
-    <textarea class="form-control" name="image" rows="6"></textarea>
-    </div>
-    <label for="description">Description</label>
-    <div class="mb-4">
-    <textarea class="form-control" name="description" rows="6"></textarea>
-    </div>
-    <label for="category">Catégorie</label>
-    <div class="mb-4">
-    <textarea class="form-control" name="category" rows="6"></textarea>
-    </div>
-    <div class="text-right">
-    <button class="tm-btn tm-btn-primary tm-btn-small">Envoyer</button>                        
-    </div>                                
-    </form>  
-    </div>';
-}
+
 ?>
 <main class="tm-main">
 
@@ -89,44 +59,20 @@ foreach($posts as $post)
     </a>                    
     
     <div class="d-flex justify-content-between tm-pt-45">
-    <span class="tm-color-primary">'.$post['category'].'</span>
-    <span class="tm-color-primary">June 24, 2020</span>
+    <span>'.$post['chapo'].'</span>
+    
     </div>
     <hr>
     <div class="d-flex justify-content-between">
-    <span>'. count($post['comments']).' comments</span>
-    <span>'.$post['user']['name'].'</span>
+    <span class="tm-color-primary">'.$post['updated_at'].'</span>
+    <span>'. count($post['comments']).' commentaires</span>
+    
     </div>
     </article>';
 }
 ?>
 </div>
-<div class="row tm-row tm-mt-100 tm-mb-75">
-<div class="tm-prev-next-wrapper">
-<a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next disabled tm-mr-20">Précédent</a>
-<a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Suivant</a>
-</div>
-<div class="tm-paging-wrapper">
-<span class="d-inline-block mr-3">Page</span>
-<nav class="tm-paging-nav d-inline-block">
-<ul>
-<li class="tm-paging-item active">
-<a href="#" class="mb-2 tm-btn tm-paging-link">1</a>
-</li>
-<li class="tm-paging-item">
-<a href="#" class="mb-2 tm-btn tm-paging-link">2</a>
-</li>
-<li class="tm-paging-item">
-<a href="#" class="mb-2 tm-btn tm-paging-link">3</a>
-</li>
-<li class="tm-paging-item">
-<a href="#" class="mb-2 tm-btn tm-paging-link">4</a>
-</li>
-</ul>
-</nav>
-</div>                
-</div>
-</div>
+</main>
 <footer>
 <div class="col1 coordonnees">
 <div class="fcol">

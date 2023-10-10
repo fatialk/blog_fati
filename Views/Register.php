@@ -52,7 +52,7 @@
       <div class="field">
         <label for="confirm-password">Confirmer le mot de passe</label>
         <div class="sec-2">
-          <input class="form-control" type="confirm-password" name="confirm-password" id="confirm-password" placeholder="********"/>
+          <input class="form-control" type="password" name="confirm-password" id="confirm-password" placeholder="********"/>
         </div>
       </div>
       <button  class="login">Créer mon compte</button>
