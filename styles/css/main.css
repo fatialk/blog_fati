@@ -270,127 +270,6 @@ button {
   }
 }
 
-/* 
-header {
-  display: flex !important;
-  justify-content: space-around;
-  box-shadow: 0 15px 10px -15px #111;
-  background-color: #f3e0c8;
-}
-header .menu {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-around;
-}
-header .menu #sidebarMenu {
-  position: relative;
-  overflow: inherit;
-  z-index: 100;
-}
-header .menu #sidebarMenu .main-content-wrapper {
-  display: flex;
-}
-header .menu #sidebarMenu .main-content-wrapper a {
-  width: 120px;
-  display: block;
-  background: #fe2b01;
-  text-align: center;
-  padding: 10px;
-  color: whitesmoke;
-  text-decoration: none;
-  margin: 0 15px;
-  border-radius: 40px;
-}
-header .menu #sidebarMenu .main-content-wrapper a:hover {
-  text-decoration: underline;
-}
-header .menu #sidebarMenu .main-content-wrapper a.active {
-  font-weight: 500;
-  text-decoration: underline;
-  color: aquamarine;
-}
-header .menu #sidebarMenu ::-webkit-scrollbar {
-  width: 12px;
-}
-header .menu #sidebarMenu ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-}
-header .menu #sidebarMenu ::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.1803921569);
-  height: 50px;
-}
-header .menu .sidebarIconToggle {
-  transition: all 0.3s;
-  box-sizing: border-box;
-  cursor: pointer;
-  position: absolute;
-  z-index: 99;
-  height: 22px;
-  width: 22px;
-  right: 10px;
-  top: 10px;
-  display: none;
-}
-header .menu .sidebarIconToggle .spinner {
-  transition: all 0.3s;
-  box-sizing: border-box;
-  position: absolute;
-  height: 3px;
-  width: 100%;
-  background-color: black;
-}
-header .menu .sidebarIconToggle .horizontal {
-  transition: all 0.3s;
-  box-sizing: border-box;
-  position: relative;
-  float: left;
-  margin-top: 3px;
-}
-header .menu .sidebarIconToggle .diagonal.part-1 {
-  position: relative;
-  transition: all 0.3s;
-  box-sizing: border-box;
-  float: left;
-}
-header .menu .sidebarIconToggle .diagonal.part-2 {
-  transition: all 0.3s;
-  box-sizing: border-box;
-  position: relative;
-  float: left;
-  margin-top: 3px;
-}
-header .menu input[type=checkbox]:checked ~ #sidebarMenu {
-  transform: translatey(0);
-  top: 50px;
-}
-header .menu input[type=checkbox] {
-  transition: all 0.3s;
-  box-sizing: border-box;
-  display: none;
-}
-header .menu input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
-  transition: all 0.3s;
-  box-sizing: border-box;
-  opacity: 0;
-}
-header .menu input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
-  transition: all 0.3s;
-  box-sizing: border-box;
-  transform: rotate(135deg);
-  margin-top: 8px;
-}
-header .menu input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
-  transition: all 0.3s;
-  box-sizing: border-box;
-  transform: rotate(-135deg);
-  margin-top: -9px;
-} */
 
 body {
   margin: 0;
@@ -468,6 +347,28 @@ a {
 .register-form{
   margin: 50px 50px 50px 0px;
 
+}
+
+.comment-content {
+  align-self: end;
+    display: flex;
+    flex-direction: column;
+}
+
+.projects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  
+}
+
+.one-project {
+  display: flex;
+  width: 50%;
+}
+
+.project-image {
+  width: 100%;
 }
 
 footer {
@@ -572,15 +473,11 @@ footer .contact{
     padding-top: 345px;
 }
 }
-
-
-
 @media (min-width: 582px){
 
   .container-fluid {
     padding-top: 300px;
 }
-
 }
 @media (min-width: 992px){
 
@@ -588,6 +485,27 @@ footer .contact{
     padding-top: 270px;
 }
 }
+
+
+@media (min-width: 280px){
+
+  .projects {
+    padding-top: 345px;
+}
+}
+@media (min-width: 582px){
+
+  .projects {
+    padding-top: 300px;
+}
+}
+@media (min-width: 992px){
+
+  .projects {
+    padding-top: 270px;
+}
+}
+
 
 @media (max-width: 582px){
 

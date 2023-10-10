@@ -14,7 +14,10 @@ class CommentController{
         $userId = 1; 
         $postId = $_POST['post_id'];
         $description = $_POST['description'];
-        $commentRepository->createComment($userId, $postId, $description);
+        $createdAt = date('Y-m-d H:i:s');
+        $updatedAt = date('Y-m-d H:i:s');
+
+        $commentRepository->createComment($userId, $postId, $description, $createdAt, $updatedAt);
         $postController = new PostController();
         $postController->getOneAction($postId);
     }

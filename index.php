@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'vendor/autoload.php';
 // On charge le fichier Autoloader
 require_once __DIR__ . '/Autoloader.php';
 App\Autoloader::register();
@@ -7,7 +8,11 @@ App\Autoloader::register();
 use App\Controller\PostController;
 use App\Controller\LoginController;
 use App\Controller\CommentController;
+use App\Controller\AdminController;
 use App\Controller\UserController;
+use App\Controller\TwigController;
+
+
 $request = $_SERVER['REQUEST_URI'];
 $viewDir = '/Views/';
 
@@ -16,6 +21,11 @@ switch ($request) {
     case '/home':
         require __DIR__ . $viewDir . 'home.php';
         break;
+
+        case '/twig':
+            $twigController = new TwigController();
+            $twigController->twigAction();
+            break;
         
         case '/posts/list':
             $postController = new PostController();
@@ -36,6 +46,11 @@ switch ($request) {
                         $postController = new PostController();
                         $postController->createPostAction();
                         break;
+
+                        case '/posts/update':
+                            $postController = new PostController();
+                            $postController->updatePostAction();
+                            break;
                         
                         case '/comments/create':
                             $commentController = new CommentController();
@@ -63,14 +78,36 @@ switch ($request) {
                                             case '/register':
                                                 require __DIR__ . $viewDir . 'Register.php';
                                                 break;
-                                                
-                                                default:
+                                                case '/projects':
+                                                    require __DIR__ . $viewDir . 'projects.php';
+                                                    break;  
+
+
+                                                    case '/admin/post/create/view':
+                                                        $adminController = new AdminController();
+                                                        $adminController->postCreateViewAction();
+                                                        break;
+
+                                                        case '/admin/post/edit/view/1':
+                                                            $adminController = new AdminController();
+                                                            $adminController->postEditViewAction(1);
+                                                            break;
+
+                                                            case '/admin/comments/list/view':
+                                                                $adminController = new AdminController();
+                                                                $adminController->viewCommentsAction();                          
+                                                                break;
+
+                                                                case '/admin/comments/approve':
+                                                                    $adminController = new AdminController();
+                                                                    $adminController->approveCommentAction();
+                                                                    break;
+                                               
+                                                    default:
                                                 http_response_code(404);
                                                 require __DIR__ . $viewDir . '404.php';
                                                 
-                                                case '/projects':
-                                                    require __DIR__ . $viewDir . 'projects.php';
-                                                    break;
+                                               
                                             
                                             }
                                             

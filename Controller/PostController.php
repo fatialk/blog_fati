@@ -3,6 +3,8 @@ namespace App\Controller;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use App\Repository\CommentRepository;
+use Twig\Loader\FilesystemLoader;
+use Twig\Environment;
 
 
 
@@ -31,15 +33,23 @@ class PostController{
         $_SESSION['post'] = $post;
         $userRepository = new UserRepository();
         $commentRepository = new CommentRepository();
-        $comments = $commentRepository->getCommentsByPostId($id);
+        $comments = $commentRepository->getCommentsByPostId($id, true);
         foreach ($comments as $key=>$comment) {
             $comments[$key]['user'] = $userRepository->getOneUserById($comment['user_id']);
         }
         
         $userPost = $userRepository->getOneUserById($post['user_id']);
-        $_SESSION['user'] = $userPost;
-        $_SESSION['comments'] = $comments;
-        require __DIR__ . $this->viewDir . 'OnePostView.php';
+        
+        $loader = new FilesystemLoader(__DIR__.'/../Views');
+        $twig = new Environment($loader);
+
+
+        echo $twig->render('onePostView.html', [
+           'user'  => $userPost,
+           'comments' => $comments,
+           'post' => $post
+        ]);
+
         
     }
     
@@ -50,10 +60,28 @@ class PostController{
         $title = $_POST['title'];
         $image = $_POST['image'];
         $description = $_POST['description'];
-        $category = $_POST['category'];
-        $post = $postRepository->createPost($userId, $title, $image, $description, $category);
+        $chapo = $_POST['chapo'];
+        $createdAt = date('Y-m-d H:i:s');
+        $updatedAt = date('Y-m-d H:i:s');
+       
+        $post = $postRepository->createPost($userId, $title, $image, $description, $chapo, $createdAt, $updatedAt );
+        header('Location: /posts/list');
+       
+    }
 
-        
+    public function updatePostAction()
+     {
+        $postRepository = new PostRepository();
+        $userId = 1;
+        $title = $_POST['title'];
+        $image = $_POST['image'];
+        $description = $_POST['description'];
+        $chapo = $_POST['chapo'];
+        $updatedAt = date('Y-m-d H:i:s');
+       
+        $post = $postRepository->updatePost($userId, $title, $image, $description, $chapo, $updatedAt );
+        header('Location: /posts/list');
+       
     }
 
     

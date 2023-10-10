@@ -21,7 +21,7 @@ $connected = (!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'
 <?php
 if($connected)
 {
-    echo "<a class='sign-out-button tm-btn-primary tm-btn' href='/signOut'>Se déconnecter</a>";
+  echo "<a class='sign-out-button tm-btn-primary tm-btn' href='/signOut'>Se déconnecter</a>";
 }
 ?>
 <div class="title">
@@ -41,31 +41,35 @@ if($connected)
 </header>
 <div class="container-fluid">
 <div class="about">
-    
-    <div class="about-illustration">
-      <img src="assets/2784258.jpg" alt="illustration">
-    </div>
-    <div class="about-center">
-      <h1>A propos de moi</h1>
-      <div class="description">
-        <span>Fatima ALKHALLOUFI, développeuse Fullstack junior passionnée par la programmation.</span>
-        <span>En Janvier 2022, j’ai décidé de me former en développement informatique, afin d'en faire mon métier principal.</span>
-        <span> Actuellement je prépare un diplôme de bac+3 en développement des applications PHP - Symfony.</span>
-        <span>Dans ce blog vous trouverez des articles sur le développement web et les nouvelles technologies d'information ainsi que les projets que j'ai réalisés durant mon parcours</span>
-        <div class="social-media-cv">
-          <span>Pour plus d'informations, vous pouvez télécharger</span>
-          <a href=""><i class="fa fa-download" aria-hidden="true"> Mon CV</i></a>
-        </div>
-        <div class="social-media-cv">
-          <span>et me suivre sur </span> 
-          <a href=""><i class="fa-brands fa-linkedin" style="color: #405dce;"> Linkedin</i></a> 
-          <span>et</span> 
-          <a href=""><i class="fa-brands fa-github" style="color: #0a0a0a;"> Github</i></a>
-        </div>
-        <span>Merci pour votre visite et n'hésitez pas de me laisser vos commentaires :) </span>    
-      </div>
-    </div>
-  </div>
+
+<div class="about-illustration">
+<img src="assets/2784258.jpg" alt="illustration">
+</div>
+<div class="about-center">
+<h1>A propos de moi</h1>
+<div class="description">
+<span>Bonjour et bienvenue sur mon site web. Je m'appelle Fatima ALKHALLOUFI, je suis développeuse Fullstack junior passionnée par la programmation.</span>
+<span>Sur la page blog vous trouverez des articles intéressants sur l'actualité numérique</span>
+<span>Et si vous avez envie de découvrir les projets que j'ai réalisés, allez sur la page mon Portofolio</span>
+<span>Vous pouvez également télécharger</span>
+<div>
+<a href="../assets/cv/CV_Fatima_ALKHALLOUFI.pdf"
+download="CV_Fatima_ALKHALLOUFI.pdf"><i class="fa fa-download" aria-hidden="true"> Mon CV</i></a>
+</div>
+
+</div>
+<div class="social-media-cv">
+<span>et me suivre sur les réseaux sociaux</span> 
+<a href=""><i class="fa-brands fa-linkedin" style="color: #405dce;"> Linkedin</i></a> 
+<span>et</span> 
+<a href=""><i class="fa-brands fa-github" style="color: #0a0a0a;"> Github</i></a>
+</div>
+
+
+<span>Merci pour votre visite et n'hésitez pas de me laisser vos commentaires :) </span>    
+</div>
+</div>
+</div>
 </div>
 <footer>
 <div class="col1 coordonnees">
