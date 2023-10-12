@@ -19,7 +19,7 @@ class PostController{
         $posts = $postRepository->getPosts();
         foreach ($posts as $key=>$post) {
             $posts[$key]['user'] = $userRepository->getOneUserById($post['user_id']);
-            $posts[$key]['comments'] = $commentRepository->getCommentsByPostId($post['id']);
+            $posts[$key]['comments'] = $commentRepository->getCommentsByPostId($post['id'], true);
         }
         $_SESSION['posts'] = $posts;
         require __DIR__ . $this->viewDir . 'ListPostView.php';

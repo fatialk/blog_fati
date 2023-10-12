@@ -63,6 +63,33 @@ class AdminController{
 
     }
 
+    public function viewUsersAction()
+    {
+        $loader = new FilesystemLoader($this->viewDir);
+        $twig = new Environment($loader);
+        $userRepository = new userRepository();
+        $users = $userRepository->viewUsers(false);
+        
+
+        echo $twig->render('approveUser.html', ['users' => $users]);
+
+    }
+
+     public function approveUserAction()
+    {
+        var_dump($_POST);
+        $id = $_POST['id'];
+        $userRepository = new UserRepository();    
+        $userApproved = $userRepository->approveUser($id);
+        
+        header('Location: /admin/users/list/view');
+        
+
+       
+
+    }
+
+
     
 }
 
