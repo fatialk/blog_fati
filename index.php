@@ -102,6 +102,16 @@ switch ($request) {
                                                                     $adminController = new AdminController();
                                                                     $adminController->approveCommentAction();
                                                                     break;
+
+                                                                    case '/admin/users/list/view':
+                                                                        $adminController = new AdminController();
+                                                                        $adminController->viewUsersAction();                          
+                                                                        break;
+                                                                    
+                                                                    case '/admin/users/approve':
+                                                                        $adminController = new AdminController();
+                                                                        $adminController->approveUserAction();
+                                                                        break;
                                                
                                                     default:
                                                 http_response_code(404);
