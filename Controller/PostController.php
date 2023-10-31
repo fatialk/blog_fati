@@ -30,10 +30,10 @@ private string $viewDir = '/../Views/';
         $twig = new Environment($loader);
 
         echo $twig->render('ListPostView.html', [
-            'connected' => (!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
-            'posts' => $posts,
-            'contact' => Helper::getContact()
+            'connected' => filter_var(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected', FILTER_VALIDATE_BOOLEAN),
+            'approved' => filter_var(!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved'], FILTER_VALIDATE_BOOLEAN),
+            'posts' => filter_var_array($posts),
+            'contact' => filter_var_array(Helper::getContact())
         ]);
 
 
