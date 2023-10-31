@@ -1,0 +1,23 @@
+<header class="header">
+<div class="title">
+<span>Fatima ALKHALLOUFI / Développeuse PHP-Symfony Junior</span> 
+<div>
+<input class="menu-btn" type="checkbox" id="menu-btn" />
+<label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+
+<ul class="menu">
+    
+<li><a class="active" href="/home">Accueil</a></li>
+<li><a href="/posts/list">Blog</a></li>
+<li><a href="/portfolio">Portfolio</a></li>
+{% if not connected %}
+<li><a class='btn-sign-in-out' href='/signIn'>Se connecter</a></li>
+{% else %}
+<li><a class='btn-sign-in-out' href='/signOut'>Se déconnecter</a></li>
+{% endif %}
+</ul>
+</div>
+
+</div>
+
+</header>

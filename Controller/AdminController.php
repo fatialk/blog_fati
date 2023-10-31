@@ -4,8 +4,10 @@ use App\Repository\AdminRepository;
 use App\Repository\PostRepository;
 use App\Repository\CommentRepository;
 use App\Repository\UserRepository;
+use App\Helper\Helper;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
+
 
 
 
@@ -17,7 +19,12 @@ class AdminController{
         $loader = new FilesystemLoader($this->viewDir);
         $twig = new Environment($loader);
 
-        echo $twig->render('createPost.html');
+        echo $twig->render('createPost.html', [
+        'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
+        'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
+        'contact' => Helper::getContact()]
+    );
+        
     }
 
     public function postEditViewAction(int $id)
@@ -27,9 +34,16 @@ class AdminController{
         $postRepository = new PostRepository();
         $post = $postRepository->getOnePostById($id);
 
+        if(empty($post))
+        {
+            
+        }
        
         echo $twig->render('editPost.html', [
+            'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
+            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
             'post' => $post,
+            'contact' => Helper::getContact()
         ]);
 
     }
@@ -45,13 +59,18 @@ class AdminController{
             $comments[$key]['user'] = $userRepository->getOneUserById($comment['user_id']);
         }
 
-        echo $twig->render('approveComment.html', ['comments' => $comments]);
+        echo $twig->render('approveComment.html', [
+            'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
+            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
+            'comments' => $comments,
+            'contact' => Helper::getContact()
+        ]);
 
     }
 
      public function approveCommentAction()
     {
-        var_dump($_POST);
+       
         $id = $_POST['id'];
         $commentRepository = new CommentRepository();    
         $commentApproved = $commentRepository->approveComment($id);
@@ -71,13 +90,18 @@ class AdminController{
         $users = $userRepository->viewUsers(false);
         
 
-        echo $twig->render('approveUser.html', ['users' => $users]);
+        echo $twig->render('approveUser.html', [
+            'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
+            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
+            'users' => $users,
+            'contact' => Helper::getContact()
+        ]);
 
     }
 
      public function approveUserAction()
     {
-        var_dump($_POST);
+    
         $id = $_POST['id'];
         $userRepository = new UserRepository();    
         $userApproved = $userRepository->approveUser($id);
@@ -88,10 +112,7 @@ class AdminController{
        
 
     }
-
-
-    
+   
 }
-
 
 ?>

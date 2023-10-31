@@ -1,37 +1,8 @@
 <!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <title>FATIMA ALKHALLOUFI/BLOG</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel='stylesheet' type='text/css' href='/styles/css/main.css' >
-    <link href="/styles/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/styles/css/templatemo-xtra-blog.css" rel="stylesheet">
-</head>
+{% include 'head.html' %}
 <body>
-    
-    <header class="header">
-<!-- <div class="menu"> -->
-<a class='sign-out-button tm-btn-primary tm-btn' href='/signOut'>Se déconnecter</a>
-<div class="title">
-<span>Bienvenue sur mon blog</span> - Fatima ALKHALLOUFI / Développeuse PHP-Symfony Junior
-<div class='space'>
-</div>
-</div>
-
-<input class="menu-btn" type="checkbox" id="menu-btn" />
-  <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-  <ul class="menu">
-    <li><a href="#apropos">A propos</a></li>
-    <li><a class="active" href="#blog">Blog</a></li>
-    <li><a href="#mesprojets">Mes projets</a></li>
-
-</ul>
-</header>
+{% include 'header.html' %}
 
     <div class="container-fluid">
         <main class="tm-main">
@@ -40,7 +11,7 @@
                 <div class="col-12 one-post">
                     <hr class="tm-hr-primary tm-mb-55">
 
-                    <img src="{{post.image}}" width="954" height="535" controls class="tm-mb-40">							  
+                    <img src="/Upload/Post/{{post.id}}." width="954" height="535" controls class="tm-mb-40">							  
                      
                 </div>
             </div>
@@ -50,27 +21,29 @@
                         <div class="mb-4">
                             <h2 class="pt-2 tm-color-primary tm-post-title">{{post.title}}</h2>
                             
-                            <p class="tm-mb-40">{{post.chapo}}</p>
                             <p>
                                 {{post.description}}
                             </p>
                     
-                            <p class="pt-2 tm-color-primary">Publié par {{user.name}} le {{post.updated_at}}</p>
-                            
-                            
-                            
+                            <p class="pt-2 tm-color-primary">Publié par {{user.name}} le {{post.updated_at}}</p>  
                         </div>
-                        
+                        {% if approved %}
+                        <div class="edit-delete-post">
+                        <a href="/admin/post/edit/view/{{post.id}}"><button  class="login">Modifier</button></a>
+                        <a href="/posts/delete/{{post.id}}"><button  class="login">Supprimer</button></a>
+                        </div>
+                        {% endif %}
+                    </div>
                         <!-- Comments -->
                         <div>
-                            <h2 class="tm-color-primary tm-post-title">Comments</h2>
+                            <!-- <h2 class="tm-color-primary tm-post-title">Comments</h2> -->
                             <hr class="tm-hr-primary tm-mb-45">
 <!-- Ici boucle comments -->
 {% for comment in comments %} 
                            <!-- debut 1st comment -->
                             <div class="tm-comment tm-mb-45">
                                 <figure class="tm-comment-figure">
-                                    <img class="user-image" src="{{comment.user.avatar}}">
+                                    <img class="user-image" src="/Upload/User/{{comment.user.id}}_{{comment.user.name}}.">
                                     <figcaption class="tm-color-primary text-center">{{comment.user.name}}</figcaption>
                                 </figure>
                                 <div>
@@ -86,6 +59,7 @@
                             <!-- fin 1st comment -->
                             {% endfor %}
                        <!-- Ici fin boucle comments -->
+                       {% if connected %}
                           <form action="/comments/create" method="post" class="mb-5 tm-comment-form">
                                 <h2 class="tm-color-primary tm-post-title mb-4">Ajouter un commentaire</h2>
                                 
@@ -98,92 +72,14 @@
                                 <div class="text-right">
                                     <button class="tm-btn tm-btn-primary tm-btn-small">Envoyer</button>                        
                                 </div>                                
-                            </form>                          
+                            </form> 
+                            {% endif %}                         
                         </div>
                     </div>
                 </div>
-                <aside class="col-lg-4 tm-aside-col">
-                    <div class="tm-post-sidebar">
-                        <hr class="mb-3 tm-hr-primary">
-                        <h2 class="mb-4 tm-post-title tm-color-primary">Catégories</h2>
-                        <ul class="tm-mb-75 pl-5 tm-category-list">
-                            <li><a href="#" class="tm-color-primary">Web design</a></li>
-                            <li><a href="#" class="tm-color-primary">Web Development</a></li>
-                            <li><a href="#" class="tm-color-primary">Wordpress</a></li>
-                            <li><a href="#" class="tm-color-primary">Base de donnée</a></li>
-                        </ul>
-                        <hr class="mb-3 tm-hr-primary">
-                        <h2 class="tm-mb-40 tm-post-title tm-color-primary">Meilleurs posts</h2>
-                        <a href="#" class="d-block tm-mb-40">
-                            <figure>
-                                <img src="img/img-02.jpg" alt="Image" class="mb-3 img-fluid">
-                                <figcaption class="tm-color-primary">Duis mollis diam nec ex viverra scelerisque a sit</figcaption>
-                            </figure>
-                        </a>
-                        <a href="#" class="d-block tm-mb-40">
-                            <figure>
-                                <img src="img/img-05.jpg" alt="Image" class="mb-3 img-fluid">
-                                <figcaption class="tm-color-primary">Integer quis lectus eget justo ullamcorper ullamcorper</figcaption>
-                            </figure>
-                        </a>
-                        <a href="#" class="d-block tm-mb-40">
-                            <figure>
-                                <img src="img/img-06.jpg" alt="Image" class="mb-3 img-fluid">
-                                <figcaption class="tm-color-primary">Nam lobortis nunc sed faucibus commodo</figcaption>
-                            </figure>
-                        </a>
-                    </div>                    
-                </aside>
             </div>
             
         </main>
     </div>
-    <footer>
-        <div class="col1">
-        <div class="fcol">
-          <h1>Voir mes projets</h1>
-          <nav>
-            <ul>
-              <li><a href="#">Chalets & Caviar</a></li>
-              <li><a href="#">Festival des films de plein air</a></li>
-              <li><a href="#">Express-food solution technique</a></li>
-            </ul>
-          </nav>
-        </div>
-        <div class="fcol">
-          <h1>Mes coordonées</h1>
-          <nav>
-            <ul>
-              <li>07 61 52 00 20</li>
-              <li>17 rue des sources</li>
-              <li>77220 Tournan en Brie</li>
-              <li>elachri.fz@gmail.com</li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-        <div class="fcol">
-          <div class="container">
-            <h1>Me contacter</h1>
-            <form action="/action_page.php">
-              <label for="fname">Nom & prénom</label>
-              <input type="text" id="fname" name="firstname" placeholder="Votre nom et prénom">
-          
-              <label for="sujet">Sujet</label>
-              <input type="text" id="sujet" name="sujet" placeholder="L'objet de votre message">
-          
-              <label for="emailAddress">Email</label>
-              <input id="emailAddress" type="email" name="email" placeholder="Votre email">
-          
-          
-              <label for="subject">Message</label>
-              <textarea id="subject" name="subject" placeholder="Votre message" style="height:200px"></textarea>
-          
-              <input type="submit" value="Envoyer">
-            </form>
-          </div>
-          
-        </div>
-      </footer>
-</body>
-</html>
+
+{% include 'footer.html' %}

@@ -11,7 +11,7 @@ class CommentController{
     private string $viewDir = '/../Views/';
     public function createCommentAction() {
         $commentRepository = new CommentRepository();
-        $userId = 1; 
+        $userId = $_SESSION['connected-user']['id']; 
         $postId = $_POST['post_id'];
         $description = $_POST['description'];
         $createdAt = date('Y-m-d H:i:s');
