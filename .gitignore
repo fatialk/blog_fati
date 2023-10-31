@@ -1,1 +1,3 @@
 /vendor
+/Upload/Post/*
+/Upload/User/*
