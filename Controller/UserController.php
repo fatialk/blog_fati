@@ -3,22 +3,47 @@ namespace App\Controller;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use App\Repository\CommentRepository;
+use App\Helper\Helper;
+use Twig\Loader\FilesystemLoader;
+use Twig\Environment;
 
 class UserController{
     
     private string $viewDir = '/../Views/';
-    private string $uploadDir = '/../Upload/User/';
+    private string $uploadDir = '../Upload/User/';
 
-    private function moveUploadedFile(string $filename)
-    {
+   
+    public function signInAction(){
         
-        $tmp_name = $_FILES["avatar"]["tmp_name"];
-                $extension = pathinfo($_FILES["avatar"]['name'])['extension'];
-                $filePath = __DIR__ .$this->uploadDir.$filename.'.'.$extension;
-                move_uploaded_file($tmp_name, $filePath);
+        $loader = new FilesystemLoader(__DIR__.$this->viewDir);
+        $twig = new Environment($loader);
 
-                return $filePath;
+        echo $twig->render('SignIn.html');
+    
     }
+    
+    public function signOutAction(){
+        
+        $loader = new FilesystemLoader(__DIR__.$this->viewDir);
+        $twig = new Environment($loader);
+        $twig->addGlobal('connected', false);
+        $twig->addGlobal('approved', false); 
+        session_destroy();
+        header('location: /signIn');
+    
+    }
+
+    public function registerAction(){
+        
+        $loader = new FilesystemLoader(__DIR__.$this->viewDir);
+        $twig = new Environment($loader);
+
+        echo $twig->render('Register.html');
+    
+    }
+
+
+    
     public function createUserAction(){
         if (empty($_POST['password']) || empty($_POST['confirm-password']) || $_POST['password'] !== $_POST['confirm-password'])
         {
@@ -26,7 +51,7 @@ class UserController{
             header('Location: /register');
             exit();
         }
-        $filePath = $this->moveUploadedFile($_POST['name']);
+       
         $userRepository = new UserRepository();
         $role = 'User';
         $name = $_POST['name'];
@@ -39,26 +64,35 @@ class UserController{
             exit();
         }
        
-         $user = $userRepository->createUser($role, $name, $filePath, $email, $password);
+         $userId = $userRepository->createUser($role, $name, $email, $password);
+         $imageName = Helper::moveUploadedFile($userId.'_'.$_POST['name'], 'avatar', $this->uploadDir);
          header('Location: /signIn');
     }
 
     
-    
+    /**
+     * vérifier si l'email et mdp sont correctes
+     */
     public function authAction(){
         $userRepository = new UserRepository();
         $email = $_POST['email'];
         $password = hash('sha512' ,$_POST['password']);
         $user = $userRepository->getOneUserByEmail($email);
+        $loader = new FilesystemLoader(__DIR__.'/../Views');
+        $twig = new Environment($loader);
         $_SESSION['status'] = 'not-connected';
         
         if(!empty($user) && $password === $user['password']) {
+            
+            $twig->addGlobal('connected', true);
+            $twig->addGlobal('approved', $user['approved']);   
             $_SESSION['status'] = 'connected';
             $_SESSION['connected-user'] = $user;
-           header('Location: /home');
-           exit();
+            header('Location: /home');
+            exit();
         }
-
+        $twig->addGlobal('connected', false);
+        $twig->addGlobal('approved', false); 
         header('Location: /signIn');
         exit();   
     }

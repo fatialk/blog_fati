@@ -27,14 +27,16 @@ class UserRepository extends ParentRepository {
      }
      
      
-     public function createUser (string $role, string $name, string $avatar, string $email, string $password) {
+     public function createUser (string $role, string $name, string $email, string $password) {
           
           
           $this->connect('blog_fati');
-          $result = $this->conn->query("INSERT INTO user (role, name, avatar, email, password) VALUES ('$role', '$name', '$avatar', '$email', '$password')");
+          $result = $this->conn->query
+          ("INSERT INTO user (role, name, email, password) VALUES ('$role', '$name', '$email', '$password')");
+          $id = $this->conn->insert_id;
           $this->close();
           
-          return true;
+          return $id;
      }
 
      public function getOneUserByEmail(string $email)

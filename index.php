@@ -11,7 +11,7 @@ use App\Controller\CommentController;
 use App\Controller\AdminController;
 use App\Controller\UserController;
 use App\Controller\TwigController;
-
+use App\Controller\DefaultController;
 
 $request = $_SERVER['REQUEST_URI'];
 $viewDir = '/Views/';
@@ -19,12 +19,12 @@ $viewDir = '/Views/';
 switch ($request) {
     
     case '/home':
-        require __DIR__ . $viewDir . 'home.php';
+        $defaultController = new DefaultController();
+        $defaultController->homeAction();
         break;
-
-        case '/twig':
-            $twigController = new TwigController();
-            $twigController->twigAction();
+        case '/contact':
+        $defaultController = new DefaultController();
+        $defaultController->contactAction();
             break;
         
         case '/posts/list':
@@ -32,15 +32,12 @@ switch ($request) {
             $postController->getListAction();
             break;
             
-            case '/posts/1':
+            case (preg_match("/^\/posts\/\d+$/i", $request) ? true : false) :
+                $matches = [];
+                preg_match("/^\/posts\/(\d+)$/i", $request, $matches);
                 $postController = new PostController();
-                $postController->getOneAction(1);
+                $postController->getOneAction($matches[1]);
                 break;
-                
-                case '/posts/3':
-                    $postController = new PostController();
-                    $postController->getOneAction(3);
-                    break;
                     
                     case '/posts/create':
                         $postController = new PostController();
@@ -51,7 +48,14 @@ switch ($request) {
                             $postController = new PostController();
                             $postController->updatePostAction();
                             break;
-                        
+
+                            case (preg_match("/^\/posts\/delete\/\d+$/i", $request) ? true : false) :
+                                $matches = [];
+                                preg_match("/^\/posts\/delete\/(\d+)$/i", $request, $matches);
+                                $postController = new PostController();
+                                $postController->deletePostAction($matches[1]);
+                            break;
+
                         case '/comments/create':
                             $commentController = new CommentController();
                             $commentController->createCommentAction();
@@ -68,18 +72,22 @@ switch ($request) {
                                     break;
                                     
                                     case '/signIn':
-                                        require __DIR__ . $viewDir . 'SignIn.php';
+                                        $userController = new UserController();
+                                        $userController->signInAction();
                                         break;
                                         case '/signOut':
-                                            session_destroy();
-                                            header('location: /signIn');
+                                            $userController = new UserController();
+                                            $userController->signOutAction();
                                             break;
                                             
                                             case '/register':
-                                                require __DIR__ . $viewDir . 'Register.php';
+                                                $userController = new UserController();
+                                        $userController->registerAction();
+                                        break;
                                                 break;
-                                                case '/projects':
-                                                    require __DIR__ . $viewDir . 'projects.php';
+                                                case '/portfolio':
+                                                    $defaultController = new DefaultController();
+                                                    $defaultController->portfolioAction();
                                                     break;  
 
 
@@ -88,10 +96,15 @@ switch ($request) {
                                                         $adminController->postCreateViewAction();
                                                         break;
 
-                                                        case '/admin/post/edit/view/1':
+                                                
+                                                        case (preg_match("/^\/admin\/post\/edit\/view\/\d+$/i", $request) ? true : false) :
+                                                                $matches = [];
+                                                                preg_match("/^\/admin\/post\/edit\/view\/(\d+)$/i", $request, $matches);
                                                             $adminController = new AdminController();
-                                                            $adminController->postEditViewAction(1);
+                                                            $adminController->postEditViewAction($matches[1]);
                                                             break;
+
+
 
                                                             case '/admin/comments/list/view':
                                                                 $adminController = new AdminController();

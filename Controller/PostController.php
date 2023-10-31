@@ -5,11 +5,11 @@ use App\Repository\UserRepository;
 use App\Repository\CommentRepository;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
-
+use App\Helper\Helper;
 
 
 class PostController{
-    
+    private string $uploadDir = '../Upload/Post/';
     private string $viewDir = '/../Views/';
     public function getListAction()
     {
@@ -21,8 +21,21 @@ class PostController{
             $posts[$key]['user'] = $userRepository->getOneUserById($post['user_id']);
             $posts[$key]['comments'] = $commentRepository->getCommentsByPostId($post['id'], true);
         }
-        $_SESSION['posts'] = $posts;
-        require __DIR__ . $this->viewDir . 'ListPostView.php';
+    
+
+        $loader = new FilesystemLoader(__DIR__.$this->viewDir);
+        $twig = new Environment($loader);
+
+        echo $twig->render('ListPostView.html', [
+            'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
+            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
+            'posts' => $posts,
+            'contact' => Helper::getContact()
+        ]);
+    
+
+        
+
     }
     
     public function getOneAction(int $id)
@@ -45,41 +58,62 @@ class PostController{
 
 
         echo $twig->render('onePostView.html', [
+           'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
+           'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
            'user'  => $userPost,
            'comments' => $comments,
-           'post' => $post
+           'post' => $post,
+           'contact' => Helper::getContact()
         ]);
 
         
     }
     
     public function createPostAction()
-     {
+     {   
+        if(!isset($_POST['title'], $_POST['image'], $_POST['description'], $_POST['chapo'])) {
+        header('Location: /home');
+     }
+
         $postRepository = new PostRepository();
-        $userId = 1;
+        $userId = $_SESSION['connected-user']['id'];
         $title = $_POST['title'];
-        $image = $_POST['image'];
         $description = $_POST['description'];
         $chapo = $_POST['chapo'];
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
-       
-        $post = $postRepository->createPost($userId, $title, $image, $description, $chapo, $createdAt, $updatedAt );
+        
+
+        if(!empty($title) && !empty($description) && !empty($chapo)) {
+            
+        $postId = $postRepository->createPost($userId, $title, $description, $chapo, $createdAt, $updatedAt );
+        $imageName = Helper::moveUploadedFile($postId, 'image', $this->uploadDir);
+        header('Location: /posts/list');  
+        }
+         
+    }
+
+    
+    public function updatePostAction()
+     {
+        $imageName = Helper::moveUploadedFile($_POST['id'], 'image', $this->uploadDir);
+        $postRepository = new PostRepository();
+        $id = $_POST['id'];
+        $userId = $_SESSION['connected-user']['id'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $chapo = $_POST['chapo'];
+        $updatedAt = date('Y-m-d H:i:s');
+      
+        $post = $postRepository->updatePost($id, $userId, $title, $description, $chapo, $updatedAt );
         header('Location: /posts/list');
        
     }
 
-    public function updatePostAction()
+    public function deletePostAction(int $id)
      {
         $postRepository = new PostRepository();
-        $userId = 1;
-        $title = $_POST['title'];
-        $image = $_POST['image'];
-        $description = $_POST['description'];
-        $chapo = $_POST['chapo'];
-        $updatedAt = date('Y-m-d H:i:s');
-       
-        $post = $postRepository->updatePost($userId, $title, $image, $description, $chapo, $updatedAt );
+        $postdeleted = $postRepository->deletePost($id);
         header('Location: /posts/list');
        
     }

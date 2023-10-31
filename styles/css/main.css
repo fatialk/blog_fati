@@ -8,14 +8,18 @@ a {
   color: inherit;
 }
 
+.sign-in-form{
+  padding: 50px!important;
+  min-width: 280px;
+}
 button {
   font-size: 20px;
 }
 
-.logo {
-  padding: 20px;
-  max-width: 400px;
-  height: 210px;
+.logo-image {
+
+  max-width: 300px;
+  
 }
 
 .main {
@@ -34,11 +38,12 @@ button {
   flex-direction: column;
   margin-right: 20px;
   flex: 0 0 40%;
+  max-width: 400px;
 }
 .main .accueil .mot-accueil {
   flex-wrap: wrap;
   padding: 20px;
-  max-width: 400px;
+  max-width: 300px;
   line-height: 2em;
   font-size: 22px;
   text-align: center;
@@ -115,19 +120,23 @@ button {
     margin-top: 30px;
   }
 }
-.logo-mini {
-  max-width: 320px;
-  height: 187px;
-}
 
 .title {
   font-size: 22px;
-  align-self: center;
+ display: flex;
+ justify-content: space-between;
   padding: 20px;
 }
+
+
+
+
 .title span {
   font-weight: bold;
   color: hsl(10deg, 99%, 50%);
+  justify-content: center;
+  display: flex;
+  width: 40%;
 }
 
 /* header */
@@ -159,7 +168,7 @@ button {
 
 .header li a {
   display: block;
-  padding: 20px 20px;
+  padding: 15px 20px;
   border-right: 1px solid #f4f4f4;
   text-decoration: none;
 }
@@ -169,14 +178,10 @@ button {
   background-color: #f4f4f4;
 }
 
-.header .logo {
-  display: block;
-  float: left;
-  font-size: 2em;
-  padding: 10px 20px;
-  text-decoration: none;
+.main-signin-register{
+  display: flex;
+  justify-content: center;
 }
-
 /* menu */
 
 .header .menu {
@@ -189,11 +194,12 @@ button {
 
 .header .menu-icon {
   cursor: pointer;
-  display: block;
+  display: flex;
   float: right;
-  padding: 28px 20px;
+  padding: 28px 20px 0px;
   position: relative;
   user-select: none;
+  justify-content: right;
 }
 
 .header .menu-icon .navicon {
@@ -251,9 +257,13 @@ button {
   top: 0;
 }
 
-/* 48em = 768px */
+.btn-sign-in-out {
+  background-color: #fe2b01;
+}
 
-@media (min-width: 48em) {
+/* 62em = 992px */
+
+@media (min-width: 62em) {
   .header li {
     float: left;
   }
@@ -283,7 +293,7 @@ a {
 
 .about {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background-color: #f0f0f0;
 }
 .about .about-illustration {
@@ -328,6 +338,7 @@ a {
 }
 .user-image{
   width: 100px;
+  height: 100px;
 }
 .add-post{
   display: flex;
@@ -355,21 +366,44 @@ a {
     flex-direction: column;
 }
 
-.projects {
+
+.portfolio {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  ALIGN-SELF: center;
+  margin-top: 200px;
+  margin-bottom: 200px;
+
   
 }
 
-.one-project {
-  display: flex;
-  width: 50%;
+.portfolio-one {
+  padding: 50px;
+  width: 600px;
+  background-color: #f3e0c8;
+  
 }
 
-.project-image {
-  width: 100%;
+.portfolio-one-title{
+  height: 100px;
+  
+
 }
+
+.portfolio-one-description{
+  max-height: 200px;
+  
+}
+
+.portfolio-image {
+  width: 100%;
+  max-height: 300px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+}
+
 
 footer {
   display: flex !important;
@@ -445,13 +479,7 @@ footer .contact{
   header {
     flex-direction: column;
   }
-  header .logo {
-    display: flex;
-  }
-  header .logo-mini {
-    align-self: center;
-    width: 100%;
-  }
+  
   .menu #sidebarMenu {
     width: 92%;
   }
@@ -466,50 +494,77 @@ footer .contact{
   }
 }/*# sourceMappingURL=main.css.map */
 
+.admin-form {
+  width: 80%;
+    margin: 0 AUTO;
+    margin-top: 200px;
+    margin-bottom: 200px;
+
+
+}
+
+.title-admin-form {
+  margin-bottom: 50px;
+
+}
 
 @media (min-width: 280px){
 
   .container-fluid {
-    padding-top: 345px;
+    padding-top: 209px;
+
 }
+.projects {
+  padding-top: 209px;
+}
+
 }
 @media (min-width: 582px){
 
   .container-fluid {
-    padding-top: 300px;
+    padding-top: 125px;
+}
+.projects {
+  padding-top: 125px;
 }
 }
 @media (min-width: 992px){
 
   .container-fluid {
-    padding-top: 270px;
+    padding-top: 109px;
+}
+.projects {
+  padding-top: 109px;
 }
 }
 
 
-@media (min-width: 280px){
 
-  .projects {
-    padding-top: 345px;
-}
-}
-@media (min-width: 582px){
-
-  .projects {
-    padding-top: 300px;
-}
-}
-@media (min-width: 992px){
-
-  .projects {
-    padding-top: 270px;
-}
-}
 
 
 @media (max-width: 582px){
 
   footer{
+    flex-direction: column;
+}
+
+
+}
+
+@media (max-width: 425px){
+
+  .title {
+    flex-direction: column;
+}
+.title span {
+  width: 100%;
+}
+}
+
+@media (max-width: 992px){
+
+  .register {
+    display: flex;
     flex-direction: column;
 }
 }

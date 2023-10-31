@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+    {% include 'head.html' %}
+<body>
+<div class="main main-signin-register">
+
+<div class="accueil">
+<div >
+<img class="logo-image" src="assets/logo-image.jpg" alt="logo">
+</div>
+<div class="mot-accueil">
+Bonjour je m'appelle <span>Fatima ALKHALLOUFI</span>, je suis <span>développeuse Fullstack junior</span>. <br>
+Je vous souhaite la bienvenue dans mon blog!
+</div>
+</div>
+
+<form class="sign-in-form" action="/auth" method="post">
+<div class="screen-1">
+
+<div class="field">
+<label for="email">Adresse e-mail</label>
+<div class="username">
+<input class="form-control" type="email" name="email" id="email" placeholder="user@e-mail.com"/>
+</div>
+</div>
+<div class="field">
+<label for="password">Mot de passe</label>
+<div class="sec-2">
+
+<input class="form-control" type="password" name="password" id="password" placeholder="*******"/>
+</div>
+</div>
+<button  class="login">Se connecter</button>
+
+
+<a class="signup" href="/register">Pas encore inscrit, je crée un compte</a>
+</div>
+</form>
+</div>
+
+{% include 'footer.html' %}
+</body>
+</html>
