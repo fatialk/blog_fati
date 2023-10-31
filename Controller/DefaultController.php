@@ -19,9 +19,9 @@ class DefaultController
         $twig = new Environment($loader);
 
         echo $twig->render('home.html', [
-            'connected' => (!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
-            'contact' => Helper::getContact()
+            'connected' => filter_var(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected', FILTER_VALIDATE_BOOLEAN),
+            'approved' => filter_var(!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved'], FILTER_VALIDATE_BOOLEAN),
+            'contact' => filter_var_array(Helper::getContact())
 
         ]);
 
@@ -34,9 +34,9 @@ class DefaultController
         $twig = new Environment($loader);
 
         echo $twig->render('portfolio.html', [
-            'connected' => (!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
-            'contact' => Helper::getContact()
+            'connected' => filter_var(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected', FILTER_VALIDATE_BOOLEAN),
+            'approved' => filter_var(!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved'], FILTER_VALIDATE_BOOLEAN),
+            'contact' => filter_var_array(Helper::getContact())
         ]);
 
     }

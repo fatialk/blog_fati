@@ -20,9 +20,9 @@ class AdminController{
         $twig = new Environment($loader);
 
         echo $twig->render('createPost.html', [
-        'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-        'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
-        'contact' => Helper::getContact()
+            'connected' => filter_var(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected', FILTER_VALIDATE_BOOLEAN),
+            'approved' => filter_var(!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved'], FILTER_VALIDATE_BOOLEAN),
+            'contact' => filter_var_array(Helper::getContact())
         ]);
         
     }
@@ -36,10 +36,10 @@ class AdminController{
 
        
         echo $twig->render('editPost.html', [
-            'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
-            'post' => $post,
-            'contact' => Helper::getContact()
+            'connected' => filter_var(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected', FILTER_VALIDATE_BOOLEAN),
+            'approved' => filter_var(!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved'], FILTER_VALIDATE_BOOLEAN),
+            'post' => filter_var_array($post),
+            'contact' => filter_var_array(Helper::getContact())
         ]);
 
     }
@@ -56,10 +56,10 @@ class AdminController{
         }
 
         echo $twig->render('approveComment.html', [
-            'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
-            'comments' => $comments,
-            'contact' => Helper::getContact()
+            'connected' => filter_var(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected', FILTER_VALIDATE_BOOLEAN),
+            'approved' => filter_var(!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved'], FILTER_VALIDATE_BOOLEAN),
+            'comments' => filter_var_array($comments),
+            'contact' => filter_var_array(Helper::getContact())
         ]);
 
     }
@@ -87,10 +87,10 @@ class AdminController{
         
 
         echo $twig->render('approveUser.html', [
-            'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
-            'users' => $users,
-            'contact' => Helper::getContact()
+            'connected' => filter_var(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected', FILTER_VALIDATE_BOOLEAN),
+            'approved' => filter_var(!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved'], FILTER_VALIDATE_BOOLEAN),
+            'users' => filter_var_array($users),
+            'contact' => filter_var_array(Helper::getContact())
         ]);
 
     }

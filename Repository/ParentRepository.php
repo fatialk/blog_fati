@@ -17,7 +17,7 @@ class ParentRepository {
         $this->conn = new mysqli($servername, $username, $password);
         // Check connection
         if ($this->conn->connect_error) {
-            die(htmlentities("Connection failed: " . $this->conn->connect_error));
+            die(filter_var("Connection failed: " . $this->conn->connect_error, FILTER_SANITIZE_STRING));
         }
         $this->conn->select_db($bddName); 
         

@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3525fe9a-30f9-44e2-8b6e-b62a3375d680" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Autoloader.php" afterPath="$PROJECT_DIR$/Autoloader.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller/AdminController.php" afterPath="$PROJECT_DIR$/Controller/AdminController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/Controller/DefaultController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller/PostController.php" afterPath="$PROJECT_DIR$/Controller/PostController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller/UserController.php" afterPath="$PROJECT_DIR$/Controller/UserController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Views/Register.html" afterPath="$PROJECT_DIR$/Views/Register.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Views/SignIn.html" afterPath="$PROJECT_DIR$/Views/SignIn.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Repository/ParentRepository.php" afterPath="$PROJECT_DIR$/Repository/ParentRepository.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,11 +19,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PostController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PostController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Controller/PostController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="35" column="63" lean-forward="false" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
+            <state relative-caret-position="221">
+              <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
               <folding>
                 <element signature="e#34#56#0#PHP" expanded="true" />
               </folding>
@@ -30,11 +31,31 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ParentRepository.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Repository/ParentRepository.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" column="102" lean-forward="false" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="102" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Autoloader.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Autoloader.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="UserController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Controller/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-623">
-              <caret line="24" column="40" lean-forward="false" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
+            <state relative-caret-position="108">
+              <caret line="55" column="65" lean-forward="false" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -88,9 +109,9 @@
             <state relative-caret-position="136">
               <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
               <folding>
-                <marker date="1698790579254" expanded="true" signature="1076:1397" ph="..." />
-                <marker date="1698790579254" expanded="true" signature="1879:2214" ph="..." />
-                <marker date="1698790579254" expanded="true" signature="2805:3131" ph="..." />
+                <marker date="1698791296852" expanded="true" signature="1178:1607" ph="..." />
+                <marker date="1698791296852" expanded="true" signature="2089:2532" ph="..." />
+                <marker date="1698791296852" expanded="true" signature="3123:3557" ph="..." />
               </folding>
             </state>
           </provider>
@@ -108,39 +129,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Environment.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/twig/twig/src/Environment.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="108" column="34" lean-forward="true" selection-start-line="108" selection-start-column="12" selection-end-line="108" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="portfolio.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Views/portfolio.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>F</find>
-      <find>&lt;</find>
-      <find>&lt;form</find>
-      <find>post_id</find>
-      <find>hiden</find>
-      <find>FILTERI</find>
-      <find>FILTER</find>
-      <find>FILTER_µ</find>
-      <find>FILTER_I</find>
       <find>FILTER_IN</find>
       <find>FILTER_INT</find>
       <find>FILTER_</find>
@@ -162,11 +154,20 @@
       <find>csrtoken</find>
       <find>csrftoken</find>
       <find>csrf_token</find>
+      <find>a</find>
+      <find>approv</find>
+      <find>approve</find>
+      <find>r</find>
+      <find>re</find>
+      <find>ren</find>
+      <find>rend</find>
+      <find>rende</find>
+      <find>render</find>
     </findStrings>
     <dirStrings>
       <dir>C:\wamp2023\www\blog_fati\Views</dir>
-      <dir>C:\wamp2023\www\blog_fati\Controller</dir>
       <dir>C:\wamp2023\www\blog_fati</dir>
+      <dir>C:\wamp2023\www\blog_fati\Controller</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -175,17 +176,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Autoloader.php" />
         <option value="$PROJECT_DIR$/index.php" />
-        <option value="$PROJECT_DIR$/Repository/ParentRepository.php" />
         <option value="$PROJECT_DIR$/Controller/CommentController.php" />
         <option value="$PROJECT_DIR$/Helper/Helper.php" />
         <option value="$PROJECT_DIR$/Views/SignIn.html" />
         <option value="$PROJECT_DIR$/Views/Register.html" />
         <option value="$PROJECT_DIR$/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/Controller/AdminController.php" />
-        <option value="$PROJECT_DIR$/Controller/UserController.php" />
         <option value="$PROJECT_DIR$/Controller/PostController.php" />
+        <option value="$PROJECT_DIR$/Repository/ParentRepository.php" />
+        <option value="$PROJECT_DIR$/Controller/UserController.php" />
+        <option value="$PROJECT_DIR$/Autoloader.php" />
       </list>
     </option>
   </component>
@@ -304,12 +305,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698786196099</updated>
-      <workItem from="1698786205098" duration="4760000" />
+      <workItem from="1698786205098" duration="5265000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4760000" />
+    <option name="totallyTimeSpent" value="5265000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
@@ -345,22 +346,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Autoloader.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="38" lean-forward="false" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Repository/ParentRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="42" lean-forward="true" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Controller/CommentController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -418,9 +403,9 @@
         <state relative-caret-position="136">
           <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
           <folding>
-            <marker date="1698790579254" expanded="true" signature="1076:1397" ph="..." />
-            <marker date="1698790579254" expanded="true" signature="1879:2214" ph="..." />
-            <marker date="1698790579254" expanded="true" signature="2805:3131" ph="..." />
+            <marker date="1698791296852" expanded="true" signature="1178:1607" ph="..." />
+            <marker date="1698791296852" expanded="true" signature="2089:2532" ph="..." />
+            <marker date="1698791296852" expanded="true" signature="3123:3557" ph="..." />
           </folding>
         </state>
       </provider>
@@ -429,14 +414,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="23" column="6" lean-forward="false" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controller/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-623">
-          <caret line="24" column="40" lean-forward="false" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -451,11 +428,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Controller/PostController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="35" column="63" lean-forward="false" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
+        <state relative-caret-position="221">
+          <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
           <folding>
             <element signature="e#34#56#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="55" column="65" lean-forward="false" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Repository/ParentRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="102" lean-forward="false" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="102" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Autoloader.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>

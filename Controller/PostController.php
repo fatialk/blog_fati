@@ -59,12 +59,12 @@ private string $viewDir = '/../Views/';
 
 
         echo $twig->render('onePostView.html', [
-            'connected' => (!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
-            'user' => $userPost,
-            'comments' => $comments,
-            'post' => $post,
-            'contact' => Helper::getContact()
+            'connected' => filter_var(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected', FILTER_VALIDATE_BOOLEAN),
+            'approved' => filter_var(!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved'], FILTER_VALIDATE_BOOLEAN),
+            'user' => filter_var_array($userPost),
+            'comments' => filter_var_array($comments),
+            'post' => filter_var_array($post),
+            'contact' => filter_var_array(Helper::getContact())
         ]);
 
 

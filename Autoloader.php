@@ -15,7 +15,7 @@ class Autoloader
                 }
                 else
                 {
-                    echo htmlentities("$fileName not found<br>\n");
+                    echo filter_var("$fileName not found<br>\n", FILTER_SANITIZE_STRING);
                 }
             }
         );

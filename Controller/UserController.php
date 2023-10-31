@@ -52,7 +52,7 @@ class UserController
             exit();
         }
 
-        $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+        $password = filter_var($_POST['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
         $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
         $password = hash('sha512', $password);
@@ -73,7 +73,7 @@ class UserController
 
         $userRepository = new UserRepository();
         $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
-        $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+        $password = filter_var($_POST['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $password = hash('sha512', $password);
         $user = $userRepository->getOneUserByEmail($email);
         $_SESSION['status'] = 'not-connected';
