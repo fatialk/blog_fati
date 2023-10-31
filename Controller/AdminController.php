@@ -19,11 +19,11 @@ class AdminController{
         $loader = new FilesystemLoader($this->viewDir);
         $twig = new Environment($loader);
 
-        echo htmlentities($twig->render('createPost.html', [
+        echo $twig->render('createPost.html', [
         'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
         'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
         'contact' => Helper::getContact()
-        ]));
+        ]);
         
     }
 
@@ -35,12 +35,12 @@ class AdminController{
         $post = $postRepository->getOnePostById($id);
 
        
-        echo htmlentities($twig->render('editPost.html', [
+        echo $twig->render('editPost.html', [
             'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
             'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
             'post' => $post,
             'contact' => Helper::getContact()
-        ]));
+        ]);
 
     }
 
@@ -55,12 +55,12 @@ class AdminController{
             $comments[$key]['user'] = $userRepository->getOneUserById($comment['user_id']);
         }
 
-        echo htmlentities($twig->render('approveComment.html', [
+        echo $twig->render('approveComment.html', [
             'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
             'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
             'comments' => $comments,
             'contact' => Helper::getContact()
-        ]));
+        ]);
 
     }
 
@@ -86,12 +86,12 @@ class AdminController{
         $users = $userRepository->viewUsers(false);
         
 
-        echo htmlentities($twig->render('approveUser.html', [
+        echo $twig->render('approveUser.html', [
             'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
             'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
             'users' => $users,
             'contact' => Helper::getContact()
-        ]));
+        ]);
 
     }
 

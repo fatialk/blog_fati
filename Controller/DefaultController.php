@@ -18,12 +18,12 @@ class DefaultController
         $loader = new FilesystemLoader(__DIR__ . $this->viewDir);
         $twig = new Environment($loader);
 
-        echo htmlentities($twig->render('home.html', [
+        echo $twig->render('home.html', [
             'connected' => (!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
             'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
             'contact' => Helper::getContact()
 
-        ]));
+        ]);
 
     }
 
@@ -33,11 +33,11 @@ class DefaultController
         $loader = new FilesystemLoader(__DIR__ . $this->viewDir);
         $twig = new Environment($loader);
 
-        echo htmlentities($twig->render('portfolio.html', [
+        echo $twig->render('portfolio.html', [
             'connected' => (!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
             'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
             'contact' => Helper::getContact()
-        ]));
+        ]);
 
     }
 

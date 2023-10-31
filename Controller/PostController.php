@@ -29,12 +29,12 @@ private string $viewDir = '/../Views/';
         $loader = new FilesystemLoader(__DIR__ . $this->viewDir);
         $twig = new Environment($loader);
 
-        echo htmlentities($twig->render('ListPostView.html', [
+        echo $twig->render('ListPostView.html', [
             'connected' => (!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
             'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
             'posts' => $posts,
             'contact' => Helper::getContact()
-        ]));
+        ]);
 
 
     }
@@ -58,14 +58,14 @@ private string $viewDir = '/../Views/';
         $twig = new Environment($loader);
 
 
-        echo htmlentities($twig->render('onePostView.html', [
+        echo $twig->render('onePostView.html', [
             'connected' => (!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
             'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
             'user' => $userPost,
             'comments' => $comments,
             'post' => $post,
             'contact' => Helper::getContact()
-        ]));
+        ]);
 
 
     }
