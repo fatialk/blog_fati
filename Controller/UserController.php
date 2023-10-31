@@ -45,7 +45,9 @@ class UserController{
 
     
     public function createUserAction(){
-        if (empty($_POST['password']) || empty($_POST['confirm-password']) || $_POST['password'] !== $_POST['confirm-password'])
+        $filterPassword = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+        $filterConfirmPassword = filter_var($_POST['confirm-password'], FILTER_SANITIZE_STRING);
+        if (empty($filterPassword) || empty($filterConfirmPassword) || $filterPassword !== $filterConfirmPassword)
         {
             echo"les données renseignées sont invalides";
             header('Location: /register');
@@ -54,9 +56,11 @@ class UserController{
        
         $userRepository = new UserRepository();
         $role = 'User';
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $password = hash('sha512' ,$_POST['password']);
+        $filterName = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+        $filterEmail = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+        $name = $filterName;
+        $email = $filterEmail;
+        $password = hash('sha512' ,$filterPassword);
         if(empty($name) || empty($email)) 
         { 
             echo"les données renseignées sont invalides";
@@ -65,7 +69,7 @@ class UserController{
         }
        
          $userId = $userRepository->createUser($role, $name, $email, $password);
-         $imageName = Helper::moveUploadedFile($userId.'_'.$_POST['name'], 'avatar', $this->uploadDir);
+         $imageName = Helper::moveUploadedFile($userId.'_'.$filterName, 'avatar', $this->uploadDir);
          header('Location: /signIn');
     }
 
@@ -75,8 +79,10 @@ class UserController{
      */
     public function authAction(){
         $userRepository = new UserRepository();
-        $email = $_POST['email'];
-        $password = hash('sha512' ,$_POST['password']);
+        $filterEmail = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+        $email = $filterEmail;
+        $filterPassword = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+        $password = hash('sha512' ,$filterPassword);
         $user = $userRepository->getOneUserByEmail($email);
         $loader = new FilesystemLoader(__DIR__.'/../Views');
         $twig = new Environment($loader);

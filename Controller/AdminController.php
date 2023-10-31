@@ -71,7 +71,7 @@ class AdminController{
      public function approveCommentAction()
     {
        
-        $id = $_POST['id'];
+        $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
         $commentRepository = new CommentRepository();    
         $commentApproved = $commentRepository->approveComment($id);
         
@@ -101,8 +101,9 @@ class AdminController{
 
      public function approveUserAction()
     {
-    
-        $id = $_POST['id'];
+        
+        $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
+       
         $userRepository = new UserRepository();    
         $userApproved = $userRepository->approveUser($id);
         

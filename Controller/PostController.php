@@ -71,15 +71,23 @@ class PostController{
     
     public function createPostAction()
      {   
-        if(!isset($_POST['title'], $_POST['image'], $_POST['description'], $_POST['chapo'])) {
+        $filterTitle = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
+        $filterImage = filter_var($_POST['image'], FILTER_SANITIZE_STRING);
+        $filterDescription = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+        $filterChapo = filter_var($_POST['chapo'], FILTER_SANITIZE_STRING);
+        
+    //     if(!isset($_POST['title'], $_POST['image'], $_POST['description'], $_POST['chapo'])) {
+    //     header('Location: /home');
+    //  }
+    if(!isset($filterTitle, $filterImage, $filterDescription, $filterChapo)) {
         header('Location: /home');
-     }
+    }
 
         $postRepository = new PostRepository();
         $userId = $_SESSION['connected-user']['id'];
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-        $chapo = $_POST['chapo'];
+        $title = $filterTitle;
+        $description = $filterDescription;
+        $chapo = $filterChapo;
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
         
@@ -96,13 +104,18 @@ class PostController{
     
     public function updatePostAction()
      {
-        $imageName = Helper::moveUploadedFile($_POST['id'], 'image', $this->uploadDir);
+        $filterId = filter_var($_POST['id'], FILTER_VALIDATE_INT);
+        $filterTitle = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
+        $filterImage = filter_var($_POST['image'], FILTER_SANITIZE_STRING);
+        $filterDescription = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+        $filterChapo = filter_var($_POST['chapo'], FILTER_SANITIZE_STRING);
+        $imageName = Helper::moveUploadedFile($filterId, 'image', $this->uploadDir);
         $postRepository = new PostRepository();
-        $id = $_POST['id'];
+        $id = $filterId;
         $userId = $_SESSION['connected-user']['id'];
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-        $chapo = $_POST['chapo'];
+        $title = $filterTitle;
+        $description = $filterDescription;
+        $chapo = $filterChapo;
         $updatedAt = date('Y-m-d H:i:s');
       
         $post = $postRepository->updatePost($id, $userId, $title, $description, $chapo, $updatedAt );

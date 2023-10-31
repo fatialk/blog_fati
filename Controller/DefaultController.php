@@ -62,8 +62,10 @@ class DefaultController{
 
     //Content                               //Set email format to HTML
     $mail->isHTML(true);
-    $mail->Subject = $_POST['subject'];
-    $mail->Body = $_POST['message'] .'<br>Nom: '.$_POST['name'] . '<br>Email: '.$_POST['email'];
+    $mail->Subject = filter_var($_POST['subject'], FILTER_SANITIZE_STRING);
+    // $mail->Subject = $_POST['subject'];
+    $mail->Body = filter_var($_POST['message'], FILTER_SANITIZE_STRING).'<br>Nom: '.filter_var($_POST['name'], FILTER_SANITIZE_STRING).'<br>Email: '.filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+    // $mail->Body = $_POST['message'] .'<br>Nom: '.$_POST['name'] . '<br>Email: '.$_POST['email'];
 
     $mail->send();
     $_SESSION['contact'] = ['statut'=>'envoyé', 'message' =>'Votre message a été envoyé'];
