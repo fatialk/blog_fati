@@ -15,7 +15,7 @@ class Autoloader
                 }
                 else
                 {
-                    echo "$fileName not found<br>\n";
+                    echo htmlentities("$fileName not found<br>\n");
                 }
             }
         );

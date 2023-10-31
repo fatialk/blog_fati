@@ -1,28 +1,35 @@
 <?php
+
 namespace App\Helper;
 
 
+class Helper
+{
 
-
-class Helper{
-    
     public static function moveUploadedFile(string $filename, string $imageName, string $uploadDir)
     {
+        if(!isset($_FILES[$imageName]))
+        {
+            echo "les données renseignées sont invalides";
+            header('Location: /home');
+            exit();
+        }
         $tmp_name = $_FILES[$imageName]["tmp_name"];
-                $extension = pathinfo($_FILES[$imageName]['name'])['extension'];
-                $filename .= '.'.$extension;
-                $filePath = $uploadDir.$filename;
-                $filePathAbsolute = __DIR__.'/'.$filePath;
-                move_uploaded_file($tmp_name,  $filePathAbsolute);
+        $extension = pathinfo($_FILES[$imageName]['name'])['extension'];
+        $filename .= '.' . $extension;
+        $filePath = $uploadDir . $filename;
+        $filePathAbsolute = __DIR__ . '/' . $filePath;
+        move_uploaded_file($tmp_name, $filePathAbsolute);
 
-                return $filename;
+        return $filename;
     }
 
-    public static function getContact() {
+    public static function getContact()
+    {
         $contact = [];
-        if(!empty($_SESSION['contact'])){
-         $contact = $_SESSION['contact']; 
-         unset($_SESSION['contact']);
+        if (!empty($_SESSION['contact'])) {
+            $contact = $_SESSION['contact'];
+            unset($_SESSION['contact']);
         }
 
         return $contact;

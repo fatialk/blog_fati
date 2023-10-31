@@ -19,11 +19,11 @@ class AdminController{
         $loader = new FilesystemLoader($this->viewDir);
         $twig = new Environment($loader);
 
-        echo $twig->render('createPost.html', [
+        echo htmlentities($twig->render('createPost.html', [
         'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
         'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
-        'contact' => Helper::getContact()]
-    );
+        'contact' => Helper::getContact()
+        ]));
         
     }
 
@@ -34,17 +34,13 @@ class AdminController{
         $postRepository = new PostRepository();
         $post = $postRepository->getOnePostById($id);
 
-        if(empty($post))
-        {
-            
-        }
        
-        echo $twig->render('editPost.html', [
+        echo htmlentities($twig->render('editPost.html', [
             'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
             'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
             'post' => $post,
             'contact' => Helper::getContact()
-        ]);
+        ]));
 
     }
 
@@ -59,12 +55,12 @@ class AdminController{
             $comments[$key]['user'] = $userRepository->getOneUserById($comment['user_id']);
         }
 
-        echo $twig->render('approveComment.html', [
+        echo htmlentities($twig->render('approveComment.html', [
             'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
             'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
             'comments' => $comments,
             'contact' => Helper::getContact()
-        ]);
+        ]));
 
     }
 
@@ -73,7 +69,7 @@ class AdminController{
        
         $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
         $commentRepository = new CommentRepository();    
-        $commentApproved = $commentRepository->approveComment($id);
+        $commentRepository->approveComment($id);
         
         header('Location: /admin/comments/list/view');
         
@@ -90,12 +86,12 @@ class AdminController{
         $users = $userRepository->viewUsers(false);
         
 
-        echo $twig->render('approveUser.html', [
+        echo htmlentities($twig->render('approveUser.html', [
             'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
             'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
             'users' => $users,
             'contact' => Helper::getContact()
-        ]);
+        ]));
 
     }
 
@@ -105,7 +101,7 @@ class AdminController{
         $id = filter_var($_POST['id'], FILTER_VALIDATE_INT);
        
         $userRepository = new UserRepository();    
-        $userApproved = $userRepository->approveUser($id);
+        $userRepository->approveUser($id);
         
         header('Location: /admin/users/list/view');
         
