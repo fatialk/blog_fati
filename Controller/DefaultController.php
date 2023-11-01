@@ -58,7 +58,7 @@ class DefaultController{
 
     //Recipients
     $mail->setFrom('', 'Contact-Blog-fati');    //Set email of the sender
-    $mail->addAddress('', '');                 //Set email and name of destination 
+    $mail->addAddress('', 'Blog-fati');         //Set email of destination 
 
     //Content                               //Set email format to HTML
     $mail->isHTML(true);
