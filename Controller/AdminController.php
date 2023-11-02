@@ -20,11 +20,8 @@ class AdminController{
         $twig = new Environment($loader);
 
         echo $twig->render('createPost.html', [
-        'connected'=> (isset($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-        // 'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-        'approved' => (isset($_SESSION['connected-user']['approved']) && $_SESSION['connected-user']['approved']),
-        // 'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
-        'contact' => Helper::getContact()]
+                'userConnected'=> isset($_SESSION['connected-user']) ? $_SESSION['connected-user'] : null,
+                'contact' => Helper::getContact()]
     );
         
     }
@@ -42,8 +39,7 @@ class AdminController{
         }
        
         echo $twig->render('editPost.html', [
-            'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
+            'userConnected'=> isset($_SESSION['connected-user']) ? $_SESSION['connected-user'] : null,
             'post' => $post,
             'contact' => Helper::getContact()
         ]);
@@ -62,8 +58,7 @@ class AdminController{
         }
 
         echo $twig->render('approveComment.html', [
-            'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
+            'userConnected'=> isset($_SESSION['connected-user']) ? $_SESSION['connected-user'] : null,
             'comments' => $comments,
             'contact' => Helper::getContact()
         ]);
@@ -93,8 +88,7 @@ class AdminController{
         
 
         echo $twig->render('approveUser.html', [
-            'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
+            'userConnected'=> isset($_SESSION['connected-user']) ? $_SESSION['connected-user'] : null,
             'users' => $users,
             'contact' => Helper::getContact()
         ]);

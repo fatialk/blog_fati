@@ -23,11 +23,7 @@ class UserController{
     }
     
     public function signOutAction(){
-        
-        $loader = new FilesystemLoader(__DIR__.$this->viewDir);
-        $twig = new Environment($loader);
-        $twig->addGlobal('connected', false);
-        $twig->addGlobal('approved', false); 
+
         session_destroy();
         header('location: /signIn');
     
@@ -78,21 +74,13 @@ class UserController{
         $email = $_POST['email'];
         $password = hash('sha512' ,$_POST['password']);
         $user = $userRepository->getOneUserByEmail($email);
-        $loader = new FilesystemLoader(__DIR__.'/../Views');
-        $twig = new Environment($loader);
-        $_SESSION['status'] = 'not-connected';
-        
+
         if(!empty($user) && $password === $user['password']) {
-            
-            $twig->addGlobal('connected', true);
-            $twig->addGlobal('approved', $user['approved']);   
-            $_SESSION['status'] = 'connected';
+
             $_SESSION['connected-user'] = $user;
             header('Location: /home');
             exit();
         }
-        $twig->addGlobal('connected', false);
-        $twig->addGlobal('approved', false); 
         header('Location: /signIn');
         exit();   
     }

@@ -27,7 +27,7 @@
                     
                             <p class="pt-2 tm-color-primary">Publié par {{user.name}} le {{post.updated_at}}</p>  
                         </div>
-                        {% if approved %}
+                        {% if userConnected is not empty and userConnected.approved %}
                         <div class="edit-delete-post">
                         <a href="/admin/post/edit/view/{{post.id}}"><button  class="login">Modifier</button></a>
                         <a href="/posts/delete/{{post.id}}"><button  class="login">Supprimer</button></a>
@@ -59,7 +59,7 @@
                             <!-- fin 1st comment -->
                             {% endfor %}
                        <!-- Ici fin boucle comments -->
-                       {% if connected %}
+                       {% if userConnected is not empty %}
                           <form action="/comments/create" method="post" class="mb-5 tm-comment-form">
                                 <h2 class="tm-color-primary tm-post-title mb-4">Ajouter un commentaire</h2>
                                 

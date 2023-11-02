@@ -1,6 +1,6 @@
 <footer>
     <div class="col1 coordonnees">
-    {% if approved %}
+    {% if userConnected is not empty and userConnected.approved %}
     <div class="fcol">
     <h1>Pages d'administration</h1>
     <nav>

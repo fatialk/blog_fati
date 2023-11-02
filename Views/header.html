@@ -10,7 +10,7 @@
 <li><a class="active" href="/home">Accueil</a></li>
 <li><a href="/posts/list">Blog</a></li>
 <li><a href="/portfolio">Portfolio</a></li>
-{% if not connected %}
+{% if userConnected is empty %}
 <li><a class='btn-sign-in-out' href='/signIn'>Se connecter</a></li>
 {% else %}
 <li><a class='btn-sign-in-out' href='/signOut'>Se déconnecter</a></li>

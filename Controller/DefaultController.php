@@ -24,8 +24,7 @@ class DefaultController{
        
 
         echo $twig->render('home.html', [
-            'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved'] ),
+            'userConnected'=> isset($_SESSION['connected-user']) ? $_SESSION['connected-user'] : null,
             'contact' => Helper::getContact()
         
         ]);
@@ -38,8 +37,7 @@ class DefaultController{
         $twig = new Environment($loader);
 
         echo $twig->render('portfolio.html', [
-            'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
-            'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved'] ),
+            'userConnected'=> isset($_SESSION['connected-user']) ? $_SESSION['connected-user'] : null,
             'contact' => Helper::getContact()
         ]);
     
