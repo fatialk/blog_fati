@@ -1,3 +1,6 @@
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5aed3d13be3045618d5ebb6bfe2d6820)](https://app.codacy.com/gh/fatialk/blog_fati?utm_source=github.com&utm_medium=referral&utm_content=fatialk/blog_fati&utm_campaign=Badge_Grade)
+
 Bonjour,  pour installer le projet blog_fati, veuillez suivre ces étapes:
 
 1/ Clonez le projet : git clone https://github.com/fatialk/blog_fati.git
