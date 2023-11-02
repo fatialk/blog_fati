@@ -55,12 +55,13 @@ class UserController{
             {
                 echo"les données renseignées sont invalides";
                 header('Location: /register');
-                exit();
-            }
+        
+            }else{
 
             $userId = $userRepository->createUser($role, $name, $email, $password);
             Helper::moveUploadedFile($userId.'_'.$_POST['name'], 'avatar', $this->uploadDir);
             header('Location: /signIn');
+            } 
         }
        
 
