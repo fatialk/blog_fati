@@ -31,7 +31,7 @@ class UserRepository extends ParentRepository {
           
           
           $this->connect('blog_fati');
-          $result = $this->conn->query
+          $this->conn->query
           ("INSERT INTO user (role, name, email, password) VALUES ('$role', '$name', '$email', '$password')");
           $id = $this->conn->insert_id;
           $this->close();
@@ -65,7 +65,7 @@ class UserRepository extends ParentRepository {
      public function approveUser(int $id)
      {
           $this->connect('blog_fati');
-          $result = $this->conn->query("UPDATE user
+          $this->conn->query("UPDATE user
           SET approved = true
           WHERE id = $id");
           $this->close();

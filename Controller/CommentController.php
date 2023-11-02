@@ -7,8 +7,7 @@ use App\Repository\PostRepository;
 
 
 class CommentController{
-    
-    private string $viewDir = '/../Views/';
+
     public function createCommentAction() {
         $commentRepository = new CommentRepository();
         $userId = $_SESSION['connected-user']['id'] ?? null;

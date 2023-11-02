@@ -85,7 +85,7 @@ class PostController{
         if(!empty($title) && !empty($description) && !empty($chapo)) {
             
         $postId = $postRepository->createPost($userId, $title, $description, $chapo, $createdAt, $updatedAt );
-        $imageName = Helper::moveUploadedFile($postId, 'image', $this->uploadDir);
+        Helper::moveUploadedFile($postId, 'image', $this->uploadDir);
         header('Location: /posts/list');  
         }
          
@@ -94,7 +94,7 @@ class PostController{
     
     public function updatePostAction()
      {
-        $imageName = Helper::moveUploadedFile($_POST['id'], 'image', $this->uploadDir);
+        Helper::moveUploadedFile($_POST['id'], 'image', $this->uploadDir);
         $postRepository = new PostRepository();
         $id = $_POST['id'];
         $userId = $_SESSION['connected-user']['id'];
@@ -103,7 +103,7 @@ class PostController{
         $chapo = $_POST['chapo'];
         $updatedAt = date('Y-m-d H:i:s');
       
-        $post = $postRepository->updatePost($id, $userId, $title, $description, $chapo, $updatedAt );
+        $postRepository->updatePost($id, $userId, $title, $description, $chapo, $updatedAt );
         header('Location: /posts/list');
        
     }
@@ -111,7 +111,7 @@ class PostController{
     public function deletePostAction(int $id)
      {
         $postRepository = new PostRepository();
-        $postdeleted = $postRepository->deletePost($id);
+        $postRepository->deletePost($id);
         header('Location: /posts/list');
        
     }

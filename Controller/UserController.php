@@ -45,24 +45,25 @@ class UserController{
         {
             echo"les données renseignées sont invalides";
             header('Location: /register');
-            exit();
+        }else{
+            $userRepository = new UserRepository();
+            $role = 'User';
+            $name = $_POST['name'] ?? null;
+            $email = $_POST['email'] ?? null ;
+            $password = hash('sha512' ,$_POST['password'] ?? null);
+            if(empty($name) || empty($email))
+            {
+                echo"les données renseignées sont invalides";
+                header('Location: /register');
+                exit();
+            }
+
+            $userId = $userRepository->createUser($role, $name, $email, $password);
+            Helper::moveUploadedFile($userId.'_'.$_POST['name'], 'avatar', $this->uploadDir);
+            header('Location: /signIn');
         }
        
-        $userRepository = new UserRepository();
-        $role = 'User';
-        $name = $_POST['name'] ?? null;
-        $email = $_POST['email'] ?? null ;
-        $password = hash('sha512' ,$_POST['password'] ?? null);
-        if(empty($name) || empty($email)) 
-        { 
-            echo"les données renseignées sont invalides";
-            header('Location: /register');
-            exit();
-        }
-       
-         $userId = $userRepository->createUser($role, $name, $email, $password);
-         $imageName = Helper::moveUploadedFile($userId.'_'.$_POST['name'], 'avatar', $this->uploadDir);
-         header('Location: /signIn');
+
     }
 
     
@@ -79,10 +80,10 @@ class UserController{
 
             $_SESSION['connected-user'] = $user;
             header('Location: /home');
-            exit();
+        }else{
+            header('Location: /signIn');
         }
-        header('Location: /signIn');
-        exit();   
+
     }
 }
     

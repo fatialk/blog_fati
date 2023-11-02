@@ -70,12 +70,9 @@ class AdminController{
        
         $id = $_POST['id'];
         $commentRepository = new CommentRepository();    
-        $commentApproved = $commentRepository->approveComment($id);
+        $commentRepository->approveComment($id);
         
         header('Location: /admin/comments/list/view');
-        
-
-       
 
     }
 
@@ -100,12 +97,9 @@ class AdminController{
     
         $id = $_POST['id'];
         $userRepository = new UserRepository();    
-        $userApproved = $userRepository->approveUser($id);
+        $userRepository->approveUser($id);
         
         header('Location: /admin/users/list/view');
-        
-
-       
 
     }
    

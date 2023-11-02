@@ -14,7 +14,6 @@ use PHPMailer\PHPMailer\Exception;
 class DefaultController{
 
     private string $viewDir = '/../Views/';
-    private string $uploadDir = '../Upload/User/';
 
     public function homeAction(){
       

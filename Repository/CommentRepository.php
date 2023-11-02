@@ -19,7 +19,7 @@ class CommentRepository extends ParentRepository {
      public function createComment(int $userId, int $postId, string $description,string $createdAt, string $updatedAt)
      {
           $this->connect('blog_fati');
-          $result = $this->conn->query("INSERT INTO comment (user_id, post_id, description, created_at, updated_at) VALUES ('$userId', '$postId', '$description', '$createdAt', '$updatedAt')");
+          $this->conn->query("INSERT INTO comment (user_id, post_id, description, created_at, updated_at) VALUES ('$userId', '$postId', '$description', '$createdAt', '$updatedAt')");
           $this->close();
 
           return true;
@@ -41,7 +41,7 @@ class CommentRepository extends ParentRepository {
      public function approveComment(int $id)
      {
           $this->connect('blog_fati');
-          $result = $this->conn->query("UPDATE comment
+          $this->conn->query("UPDATE comment
           SET approved = true
           WHERE id = $id");
           $this->close();

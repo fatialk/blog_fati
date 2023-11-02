@@ -30,7 +30,7 @@ class PostRepository extends ParentRepository {
           
           
           $this->connect('blog_fati');
-          $result = $this->conn->query(
+          $this->conn->query(
           'INSERT INTO post (user_id, title, chapo, description, created_at, updated_at) VALUES ('.$userId.', "'.$title.'", "'.$chapo.'", "'.$description.'", "'.$createdAt.'", "'.$updatedAt.'")');
           $id = $this->conn->insert_id;
           $this->close();
@@ -43,7 +43,7 @@ class PostRepository extends ParentRepository {
           
           
           $this->connect('blog_fati');
-          $result = $this->conn->query(
+          $this->conn->query(
          'UPDATE post 
           SET user_id = '.$userId.', title = "'.$title.'", description = "'.$description.'", chapo = "'.$chapo.'", updated_at = "'.$updatedAt.'"
           WHERE id = '.$id);
@@ -57,7 +57,7 @@ class PostRepository extends ParentRepository {
           
           
           $this->connect('blog_fati');
-          $result = $this->conn->query(
+          $this->conn->query(
          "DELETE FROM post
           WHERE id = $id");
           $this->close();
