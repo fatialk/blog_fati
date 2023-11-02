@@ -12,4 +12,8 @@ Bonjour,  pour installer le projet blog_fati, veuillez suivre ces étapes:
         4.2 / Ajouter les données de votre serveur SMTP : (Host, Username, Password)
         4.3 / Au niveau de //Recipients: Ajouter l'adresse email qui sert pour l'envoi et celle ou vous souhaiterez recevoir le message de contact
 
+Ci-dessous le rapport qualité du code réalisé par CODACY:
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/d12d277c30814035839f7d09e36ac6b6)](https://app.codacy.com/gh/fatialk/blog_fati/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
 
