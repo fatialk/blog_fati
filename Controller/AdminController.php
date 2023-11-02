@@ -20,7 +20,8 @@ class AdminController{
         $twig = new Environment($loader);
 
         echo $twig->render('createPost.html', [
-        'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
+        'connected'=> (isset($_SESSION['status']) && $_SESSION['status'] === 'connected'),
+        // 'connected'=>(!empty($_SESSION['status']) && $_SESSION['status'] === 'connected'),
         'approved' => (isset($_SESSION['connected-user']['approved']) && $_SESSION['connected-user']['approved']),
         // 'approved' => (!empty($_SESSION['connected-user']) && $_SESSION['connected-user']['approved']),
         'contact' => Helper::getContact()]
