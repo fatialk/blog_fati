@@ -41,7 +41,7 @@ class UserController{
 
     
     public function createUserAction(){
-        if (empty($_POST['password']) || empty($_POST['confirm-password']) || $_POST['password'] !== $_POST['confirm-password'])
+        if (!isset($_POST['password'], $_POST['confirm-password']) || $_POST['password'] !== $_POST['confirm-password'])
         {
             echo"les données renseignées sont invalides";
             header('Location: /register');
@@ -50,9 +50,9 @@ class UserController{
        
         $userRepository = new UserRepository();
         $role = 'User';
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $password = hash('sha512' ,$_POST['password']);
+        $name = $_POST['name'] ?? null;
+        $email = $_POST['email'] ?? null ;
+        $password = hash('sha512' ,$_POST['password'] ?? null);
         if(empty($name) || empty($email)) 
         { 
             echo"les données renseignées sont invalides";
@@ -71,8 +71,8 @@ class UserController{
      */
     public function authAction(){
         $userRepository = new UserRepository();
-        $email = $_POST['email'];
-        $password = hash('sha512' ,$_POST['password']);
+        $email = $_POST['email'] ?? null;
+        $password = hash('sha512' ,$_POST['password'] ?? null);
         $user = $userRepository->getOneUserByEmail($email);
 
         if(!empty($user) && $password === $user['password']) {

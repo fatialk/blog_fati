@@ -15,7 +15,7 @@ class Autoloader
                 }
                 else
                 {
-                    echo "$fileName not found<br>\n";
+                    echo htmlspecialchars("$fileName not found<br>\n", ENT_HTML5);
                 }
             }
         );

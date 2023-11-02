@@ -11,15 +11,14 @@ class CommentController{
     private string $viewDir = '/../Views/';
     public function createCommentAction() {
         $commentRepository = new CommentRepository();
-        $userId = $_SESSION['connected-user']['id']; 
-        $postId = $_POST['post_id'];
-        $description = $_POST['description'];
+        $userId = $_SESSION['connected-user']['id'] ?? null;
+        $postId = $_POST['post_id'] ?? null;
+        $description = $_POST['description'] ?? null;
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = date('Y-m-d H:i:s');
 
         $commentRepository->createComment($userId, $postId, $description, $createdAt, $updatedAt);
-        $postController = new PostController();
-        $postController->getOneAction($postId);
+        header('Location: /posts/'.$postId);
     }
 }
 ?>
