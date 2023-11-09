@@ -1,20 +1,19 @@
 <?php
-session_start();
-require 'vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 // On charge le fichier Autoloader
-require_once __DIR__ . '/Autoloader.php';
+require __DIR__.'/../Autoloader.php';
+Dotenv\Dotenv::createUnsafeImmutable(__DIR__.'/../')->load();
 App\Autoloader::register();
+session_start();
 
 use App\Controller\PostController;
-use App\Controller\LoginController;
 use App\Controller\CommentController;
 use App\Controller\AdminController;
 use App\Controller\UserController;
-use App\Controller\TwigController;
 use App\Controller\DefaultController;
 
 $request = $_SERVER['REQUEST_URI'];
-$viewDir = '/Views/';
+$viewDir = '../views/';
 
 switch ($request) {
 

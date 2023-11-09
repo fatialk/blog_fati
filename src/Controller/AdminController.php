@@ -1,6 +1,5 @@
 <?php
 namespace App\Controller;
-use App\Repository\AdminRepository;
 use App\Repository\PostRepository;
 use App\Repository\CommentRepository;
 use App\Repository\UserRepository;
@@ -13,7 +12,7 @@ use Twig\Environment;
 
 class AdminController{
     
-    private string $viewDir = __DIR__.'/../Views/';
+    private string $viewDir = __DIR__.'/../../views/';
     public function postCreateViewAction()
     {
         $loader = new FilesystemLoader($this->viewDir);
@@ -33,11 +32,7 @@ class AdminController{
         $postRepository = new PostRepository();
         $post = $postRepository->getOnePostById($id);
 
-        if(empty($post))
-        {
-            
-        }
-       
+    
         echo $twig->render('editPost.html', [
             'userConnected'=> isset($_SESSION['connected-user']) ? $_SESSION['connected-user'] : null,
             'post' => $post,
@@ -54,7 +49,7 @@ class AdminController{
         $userRepository = new userRepository();
         $comments = $commentRepository->viewComments(false);
         foreach ($comments as $key=>$comment) {
-            $comments[$key]['user'] = $userRepository->getOneUserById($comment['user_id']);
+            $comment->setUser($userRepository->getOneUserById($comment->getUserId()));
         }
 
         echo $twig->render('approveComment.html', [
@@ -68,7 +63,7 @@ class AdminController{
      public function approveCommentAction()
     {
        
-        $id = $_POST['id'];
+        $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
         $commentRepository = new CommentRepository();    
         $commentRepository->approveComment($id);
         
@@ -95,7 +90,7 @@ class AdminController{
      public function approveUserAction()
     {
     
-        $id = $_POST['id'];
+        $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
         $userRepository = new UserRepository();    
         $userRepository->approveUser($id);
         

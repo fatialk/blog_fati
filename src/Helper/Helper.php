@@ -8,7 +8,7 @@ class Helper{
     
     public static function moveUploadedFile(string $filename, string $imageName, string $uploadDir)
     {
-        $tmp_name = $_FILES[$imageName]["tmp_name"];
+                $tmp_name = $_FILES[$imageName]["tmp_name"];
                 $extension = pathinfo($_FILES[$imageName]['name'])['extension'];
                 $filename .= '.'.$extension;
                 $filePath = $uploadDir.$filename;

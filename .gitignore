@@ -4,3 +4,4 @@ Upload/Post/*
 Upload/User/*
 !Upload/User/.gitkeep
 .idea/
+.env
