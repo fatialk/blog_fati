@@ -1,11 +1,8 @@
 <?php
 namespace App\Repository;
 use mysqli;
-
 class Database {
-    
     protected ?mysqli $conn = null;
-
     protected function connect()
     {
         $servername = getenv('DB_HOST');
@@ -20,14 +17,9 @@ class Database {
         }else{
             $this->conn->select_db($dbname);
         }
-
     }
-
     protected function close()
-    { 
+    {
         $this->conn->close();
     }
-
-    
 }
-?>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+	{% include 'head.html.twig' %}
+	<body>
+		{% include 'header.html.twig' %}
+		<!-- Users -->
+		<div class="admin-form">
+			<h2 class="title-admin-form">Approuver les utilisateurs</h2>
+			<hr class="tm-hr-primary tm-mb-45">
+			{% for user in users %}
+				<div
+					class="admin-form">
+					<!-- debut 1st user -->
+					<div class="tm-comment tm-mb-45">
+						<figure class="tm-comment-figure">
+							<img class="user-image" src="/public/assets/Upload/User/{{user.id}}_{{user.name}}.">
+							<figcaption class="tm-color-primary text-center">{{user.name}}</figcaption>
+						</figure>
+						<div>
+							<p>
+								{{user.email}}
+							</p>
+							<form action="/admin/users/approve" method="post">
+								<input class="form-control" name="id" type="hidden" value="{{user.id}}">
+								<input type="submit" value="Valider">
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- fin 1st user -->
+			{% endfor %}
+		</div>
+		{% include 'footer.html.twig' %}
+	</body>
+</html>

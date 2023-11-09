@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+	{% include 'head.html.twig' %}
+	<body>
+		{% include 'header.html.twig' %}
+		<div class="container-fluid">
+			<main class="tm-main">
+				<div class="row tm-row">
+					<div class="col-12 one-post">
+						<hr class="tm-hr-primary tm-mb-55">
+						<img src="/public/assets/Upload/Post/{{post.id}}." width="954" height="535" controls class="tm-mb-40">
+					</div>
+				</div>
+				<div class="row tm-row">
+					<div class="col-lg-8 tm-post-col">
+						<div class="tm-post-full">
+							<div class="mb-4">
+								<h2 class="pt-2 tm-color-primary tm-post-title">{{post.title}}</h2>
+								<p>
+									{{post.description}}
+								</p>
+								<p class="pt-2 tm-color-primary">Publié par
+									{{user.name}}
+									le
+									{{post.updatedAt}}</p>
+							</div>
+							{% if userConnected is not empty and userConnected.approved %}
+								<div class="edit-delete-post">
+									<a href="/admin/post/edit/view/{{post.id}}">
+										<button class="login">Modifier</button>
+									</a>
+									<a href="/posts/delete/{{post.id}}">
+										<button class="login">Supprimer</button>
+									</a>
+								</div>
+							{% endif %}
+						</div>
+						<!-- Comments -->
+						<div>
+							<!-- <h2 class="tm-color-primary tm-post-title">Comments</h2> -->
+							<hr
+							class="tm-hr-primary tm-mb-45">
+							<!-- Ici boucle comments -->
+							{% for comment in comments %}
+								<!-- debut 1st comment -->
+								<div class="tm-comment tm-mb-45">
+									<figure class="tm-comment-figure">
+										<img class="user-image" src="/public/assets/Upload/User/{{comment.user.id}}_{{comment.user.name}}.">
+										<figcaption class="tm-color-primary text-center">{{comment.user.name}}</figcaption>
+									</figure>
+									<div>
+										<p>
+											{{comment.description}}
+										</p>
+										<div class="d-flex justify-content-between">
+											<span class="tm-color-primary">a répondu le
+												{{comment.created_at}}</span>
+										</div>
+									</div>
+								</div>
+								<!-- fin 1st comment -->
+							{% endfor %}
+							<!-- Ici fin boucle comments -->
+							{% if userConnected is not empty %}
+								<form action="/comments/create" method="post" class="mb-5 tm-comment-form">
+									<h2 class="tm-color-primary tm-post-title mb-4">Ajouter un commentaire</h2>
+									<div class="mb-4">
+										<input class="form-control" name="post_id" type="hidden" value="{{post.id}}">
+									</div>
+									<div class="mb-4">
+										<textarea class="form-control" name="description" rows="6"></textarea>
+									</div>
+									<div class="text-right">
+										<button class="tm-btn tm-btn-primary tm-btn-small">Envoyer</button>
+									</div>
+								</form>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html></div>{% include 'footer.html.twig' %}

@@ -1,12 +1,7 @@
 <?php
 namespace App\Repository;
 use App\Entity\Comment;
-use App\Entity\User;
-use App\Entity\Post;
-
-
 class CommentRepository extends Database {
-     
      public function getCommentsByPostId(int $postId, int $approved)
      {
           $this->connect();
@@ -21,10 +16,8 @@ class CommentRepository extends Database {
           while ($row = $result->fetch_assoc()) {
                $comments[] = $this->buildObject($row);
           }
-          
           return $comments;
      }
-     
      public function createComment(Comment $comment)
      {
           $this->connect();
@@ -39,10 +32,8 @@ class CommentRepository extends Database {
           $stmt->bind_param("iisss", $userId, $postId, $description, $createdAt, $updatedAt);
           $stmt->execute();
           $this->close();
-          
           return true;
      }
-     
      public function viewComments(int $approved)
      {
           $this->connect();
@@ -57,10 +48,8 @@ class CommentRepository extends Database {
           while ($row = $result->fetch_assoc()) {
                $comments[] = $this->buildObject($row);
           }
-          
           return $comments;
      }
-     
      public function approveComment(int $id)
      {
           $this->connect();
@@ -70,10 +59,8 @@ class CommentRepository extends Database {
           $stmt->bind_param("i", $id);
           $stmt->execute();
           $this->close();
-          
           return true;
      }
-     
      private function buildObject(?array $row)
      {
           if(empty($row))
@@ -81,7 +68,6 @@ class CommentRepository extends Database {
                return null;
           }
           $comment = new Comment();
-          
           $comment->setId($row['id']);
           $comment->setUserId($row['user_id']);
           $comment->setPostId($row['post_id']);
@@ -89,8 +75,6 @@ class CommentRepository extends Database {
           $comment->setCreatedAt($row['created_at']);
           $comment->setUpdatedAt($row['updated_at']);
           $comment->setApproved($row['approved']);
-          
           return $comment;
      }
 }
-?>

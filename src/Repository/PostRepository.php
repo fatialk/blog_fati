@@ -1,10 +1,7 @@
 <?php
 namespace App\Repository;
 use App\Entity\Post;
-
-
 class PostRepository extends Database {
-     
      public function getPosts()
      {
           $this->connect();
@@ -18,10 +15,8 @@ class PostRepository extends Database {
           while ($row = $result->fetch_assoc()) {
                $posts[] = $this->buildObject($row);
           }
-          
           return $posts;
      }
-     
      public function getOnePostById(int $id)
      {
           $this->connect();
@@ -34,13 +29,9 @@ class PostRepository extends Database {
           $this->close();
           $row = $result->fetch_assoc();
           return $this->buildObject($row);
-          
      }
-     
-     public function createPost (Post $post) 
+     public function createPost (Post $post)
      {
-          
-          
           $this->connect();
           if (!($stmt = $this->conn->prepare('INSERT INTO post (user_id, title, chapo, description, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)'))) {
                echo "Échec lors de la préparation : (" . $this->conn->errno . ") " . $this->conn->error;
@@ -57,12 +48,9 @@ class PostRepository extends Database {
           $this->close();
           return $id;
      }
-     
      public function updatePost (Post $post) {
-          
-          
           $this->connect();
-          if (!($stmt = $this->conn->prepare('UPDATE post 
+          if (!($stmt = $this->conn->prepare('UPDATE post
           SET user_id = ?, title = ?, chapo = ?, description = ?, updated_at = ? WHERE id = ?'))) {
                echo "Échec lors de la préparation : (" . $this->conn->errno . ") " . $this->conn->error;
           }
@@ -75,14 +63,9 @@ class PostRepository extends Database {
           $stmt->bind_param("issssi", $userId, $title, $chapo, $description, $updatedAt, $id);
           $stmt->execute();
           $this->close();
-          
-          
           return true;
      }
-     
      public function deletePost (int $id) {
-          
-          
           $this->connect();
           if (!($stmt = $this->conn->prepare("DELETE FROM post
           WHERE id=?"))) {
@@ -91,25 +74,19 @@ class PostRepository extends Database {
           $stmt->bind_param("i", $id);
           $stmt->execute();
           $result = $stmt->get_result();
-          $this->close();   
+          $this->close();
           return true;
      }
-     
-     
-     
      private function buildObject(array $row)
      {
           $post = new Post();
-          
-          $post->setId($row['id']);  
+          $post->setId($row['id']);
           $post->setUserId($row['user_id']);
           $post->setTitle($row['title']);
           $post->setChapo($row['chapo']);
           $post->setDescription($row['description']);
-          $post->setCreatedAt($row['created_at']);  
+          $post->setCreatedAt($row['created_at']);
           $post->setUpdatedAt($row['updated_at']);
-          
           return $post;
      }
 }
-?>

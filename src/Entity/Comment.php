@@ -1,9 +1,7 @@
 <?php
 namespace App\Entity;
 use DateTime;
-
 class Comment{
-    
     private int $id;
     private int $userId;
     private int $postId;
@@ -12,9 +10,6 @@ class Comment{
     private string $updatedAt;
     private bool $approved;
     private User $user;
-    
-    
-    
     /**
     * Get the value of id
     */
@@ -22,17 +17,14 @@ class Comment{
     {
         return $this->id;
     }
-    
     /**
     * Set the value of id
     */
     public function setId(int $id): self
     {
         $this->id = $id;
-        
         return $this;
     }
-    
     /**
     * Get the value of userId
     */
@@ -40,17 +32,14 @@ class Comment{
     {
         return $this->userId;
     }
-    
     /**
     * Set the value of userId
     */
     public function setUserId(int $userId): self
     {
         $this->userId = $userId;
-        
         return $this;
     }
-    
     /**
     * Get the value of postId
     */
@@ -58,17 +47,14 @@ class Comment{
     {
         return $this->postId;
     }
-    
     /**
     * Set the value of postId
     */
     public function setPostId(int $postId): self
     {
         $this->postId = $postId;
-        
         return $this;
     }
-    
     /**
     * Get the value of description
     */
@@ -76,18 +62,14 @@ class Comment{
     {
         return $this->description;
     }
-    
     /**
     * Set the value of description
     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
-        
         return $this;
     }
-    
-    
     /**
     * Get the value of approved
     */
@@ -95,18 +77,14 @@ class Comment{
     {
         return $this->approved;
     }
-    
     /**
     * Set the value of approved
     */
     public function setApproved(bool $approved): self
     {
         $this->approved = $approved;
-        
         return $this;
     }
- 
-
     /**
      * Get the value of user
      */
@@ -114,17 +92,14 @@ class Comment{
     {
         return $this->user;
     }
-
     /**
      * Set the value of user
      */
     public function setUser(User $user): self
     {
         $this->user = $user;
-
         return $this;
     }
-
     /**
      * Get the value of createdAt
      */
@@ -132,17 +107,14 @@ class Comment{
     {
         return $this->createdAt;
     }
-
     /**
      * Set the value of createdAt
      */
     public function setCreatedAt(string $createdAt): self
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
-
     /**
      * Get the value of updatedAt
      */
@@ -150,16 +122,12 @@ class Comment{
     {
         return $this->updatedAt;
     }
-
     /**
      * Set the value of updatedAt
      */
     public function setUpdatedAt(string $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
         return $this;
     }
 }
-
-?>

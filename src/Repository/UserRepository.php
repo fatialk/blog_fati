@@ -1,9 +1,7 @@
 <?php
 namespace App\Repository;
 use App\Entity\User;
-
 class UserRepository extends Database {
-     
      public function getUsers()
      {
           $this->connect();
@@ -12,14 +10,13 @@ class UserRepository extends Database {
           }
           $stmt->execute();
           $result = $stmt->get_result();
-          $this->close(); 
-          $rows = []; 
+          $this->close();
+          $rows = [];
           while ($row = $result->fetch_assoc()) {
-               $users[] = $this->buildObject($row);    
+               $users[] = $this->buildObject($row);
           }
           return $users;
      }
-     
      public function getOneUserById(int $id)
      {
           $this->connect();
@@ -33,11 +30,7 @@ class UserRepository extends Database {
           $row = $result->fetch_assoc();
           return $this->buildObject($row);
      }
-     
-     
      public function createUser (User $user) {
-          
-          
           $this->connect();
           if (!($stmt = $this->conn->prepare('INSERT INTO user (role, name, email, password) VALUES (?, ?, ?, ?)'))) {
                echo "Échec lors de la préparation : (" . $this->conn->errno . ") " . $this->conn->error;
@@ -52,7 +45,6 @@ class UserRepository extends Database {
           $this->close();
           return $id;
      }
-     
      public function getOneUserByEmail(string $email)
      {
           $this->connect();
@@ -65,7 +57,6 @@ class UserRepository extends Database {
           $this->close();
           return $this->buildObject($result->fetch_assoc());
      }
-     
      public function viewUsers(int $approved)
      {
           $this->connect();
@@ -75,10 +66,8 @@ class UserRepository extends Database {
           while ($row = $result->fetch_assoc()) {
                $users[] = $this->buildObject($row);
           }
-          
           return $users;
      }
-     
      public function approveUser(int $id)
      {
           $this->connect('blog_fati');
@@ -86,10 +75,8 @@ class UserRepository extends Database {
           SET approved = true
           WHERE id = $id");
           $this->close();
-          
           return true;
      }
-     
      private function buildObject(?array $row)
      {
           if(empty($row))
@@ -103,9 +90,6 @@ class UserRepository extends Database {
           $user->setEmail($row['email']);
           $user->setPassword($row['password']);
           $user->setApproved($row['approved']);
-          
           return $user;
      }
-     
 }
-?>
