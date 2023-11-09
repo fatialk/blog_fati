@@ -26,10 +26,18 @@ class UserController
     {
         $loader = new FilesystemLoader(__DIR__ . $this->viewDir);
         $twig = new Environment($loader);
-        echo $twig->render('Register.html.twig');
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
+        echo $twig->render('Register.html.twig', [
+            'csrf_token' => $_SESSION['csrf_token']
+        ]);
     }
     public function createUserAction()
     {
+        if($_SESSION['csrf_token'] !== $_POST['csrf_token'])
+        {
+            echo "Attaque csrf";
+            header('Location: /register');
+        }
         if (!isset($_POST['password'], $_POST['confirm-password']) || $_POST['password'] !== $_POST['confirm-password']) {
             echo "les données renseignées sont invalides";
             header('Location: /register');

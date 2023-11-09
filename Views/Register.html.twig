@@ -16,6 +16,7 @@
 				</div>
 			</div>
 			<form class="register-form" action="/users/create" enctype="multipart/form-data" method="post">
+							<input type="hidden" name="csrf_token" value="{{csrf_token}}"/>
 				<div class="screen-1">
 					<div class="field">
 						<label for="name">Nom et prénom</label>
@@ -32,7 +33,7 @@
 					<div class="field">
 						<label for="email">Email</label>
 						<div class="sec-2">
-							<input class="form-control" type="email" name="email" id="email" placeholder="user@e-mail.com"/>
+							<input class="form-control" type="text" name="email" id="email" placeholder="user@e-mail.com"/>
 						</div>
 					</div>
 					<div class="field">
