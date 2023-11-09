@@ -11,7 +11,6 @@ class UserRepository extends Database {
           $stmt->execute();
           $result = $stmt->get_result();
           $this->close();
-          $rows = [];
           while ($row = $result->fetch_assoc()) {
                $users[] = $this->buildObject($row);
           }

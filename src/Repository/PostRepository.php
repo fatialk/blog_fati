@@ -73,7 +73,7 @@ class PostRepository extends Database {
           }
           $stmt->bind_param("i", $id);
           $stmt->execute();
-          $result = $stmt->get_result();
+          $stmt->get_result();
           $this->close();
           return true;
      }

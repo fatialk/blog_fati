@@ -36,7 +36,7 @@ class AdminController{
         $commentRepository = new commentRepository();
         $userRepository = new userRepository();
         $comments = $commentRepository->viewComments(false);
-        foreach ($comments as $key=>$comment) {
+        foreach ($comments as $_=>$comment) {
             $comment->setUser($userRepository->getOneUserById($comment->getUserId()));
         }
         echo $twig->render('approveComment.html.twig', [

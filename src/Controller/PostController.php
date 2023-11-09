@@ -16,7 +16,7 @@ class PostController{
         $postRepository = new PostRepository();
         $commentRepository = new CommentRepository();
         $posts = $postRepository->getPosts();
-        foreach ($posts as $key=>$post) {
+        foreach ($posts as $_=>$post) {
             $post->setUser($userRepository->getOneUserById($post->getUserId()));
             $post->setComments($commentRepository->getCommentsByPostId($post->getId(), true));
         }
@@ -36,7 +36,7 @@ class PostController{
         $userRepository = new UserRepository();
         $commentRepository = new CommentRepository();
         $comments = $commentRepository->getCommentsByPostId($id, true);
-        foreach ($comments as $key=>$comment) {
+        foreach ($comments as $_=>$comment) {
             $comment->setUser($userRepository->getOneUserById($comment->getUserId()));
         }
         $userPost = $userRepository->getOneUserById($post->getUserId());
