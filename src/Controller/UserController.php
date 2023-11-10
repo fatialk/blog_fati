@@ -33,7 +33,7 @@ class UserController
     }
     public function createUserAction()
     {
-        if($_SESSION['csrf_token'] !== $_POST['csrf_token'])
+        if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
         {
             echo "Attaque csrf";
             header('Location: /register');
