@@ -15,7 +15,10 @@ class UserController
     {
         $loader = new FilesystemLoader(__DIR__ . $this->viewDir);
         $twig = new Environment($loader);
-        echo $twig->render('SignIn.html.twig');
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
+        echo $twig->render('SignIn.html.twig', [
+            'csrf_token' => $_SESSION['csrf_token']
+        ]);
     }
     public function signOutAction()
     {
@@ -26,14 +29,16 @@ class UserController
     {
         $loader = new FilesystemLoader(__DIR__ . $this->viewDir);
         $twig = new Environment($loader);
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
+        $nonce = random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
+        $_SESSION['nonce']=bin2hex($nonce);
+        // $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
         echo $twig->render('Register.html.twig', [
-            'csrf_token' => $_SESSION['csrf_token']
+            'nonce' => $_SESSION['nonce']
         ]);
     }
     public function createUserAction()
     {
-        if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
+        if (!hash_equals($_SESSION['nonce'], $_POST['nonce']))
         {
             echo "Attaque csrf";
             header('Location: /register');
@@ -62,6 +67,11 @@ class UserController
      */
     public function authAction()
     {
+        if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
+        {
+            echo "Attaque csrf";
+            header('Location: /signIn');
+        }
         $userRepository = new UserRepository();
         $anonymous = new User();
         $anonymous->setEmail(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));

@@ -5,7 +5,7 @@
 		<div class="main register main-signin-register">
 			<div class="accueil">
 				<div>
-					<img class="logo-image" src="assets/logo-image.jpg" alt="logo">
+					<img class="logo-image" src="/public/assets/logo-image.jpg" alt="logo">
 				</div>
 				<div class="mot-accueil">
 					Bonjour je m'appelle
@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<form class="register-form" action="/users/create" enctype="multipart/form-data" method="post">
-							<input type="hidden" name="csrf_token" value="{{csrf_token}}"/>
+				<input type="hidden" name="nonce" value="{{nonce}}"/>
 				<div class="screen-1">
 					<div class="field">
 						<label for="name">Nom et prénom</label>

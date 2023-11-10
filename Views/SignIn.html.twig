@@ -5,7 +5,7 @@
 		<div class="main main-signin-register">
 			<div class="accueil">
 				<div>
-					<img class="logo-image" src="assets/logo-image.jpg" alt="logo">
+					<img class="logo-image" src="/public/assets/logo-image.jpg" alt="logo">
 				</div>
 				<div class="mot-accueil">
 					Bonjour je m'appelle
@@ -16,6 +16,7 @@
 				</div>
 			</div>
 			<form class="sign-in-form" action="/auth" method="post">
+				<input type="hidden" name="csrf_token" value="{{csrf_token}}"/>
 				<div class="screen-1">
 					<div class="field">
 						<label for="email">Adresse e-mail</label>
