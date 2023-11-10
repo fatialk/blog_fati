@@ -11,22 +11,32 @@ class DefaultController
     {
         $loader = new FilesystemLoader(__DIR__ . $this->viewDir);
         $twig = new Environment($loader);
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
         echo $twig->render('home.html.twig', [
             'userConnected' => isset($_SESSION['connected-user']) ? $_SESSION['connected-user'] : null,
-            'contact' => Helper::getContact()
+            'contact' => Helper::getContact(),
+            'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
     public function portfolioAction()
     {
         $loader = new FilesystemLoader(__DIR__ . $this->viewDir);
         $twig = new Environment($loader);
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
         echo $twig->render('portfolio.html.twig', [
             'userConnected' => isset($_SESSION['connected-user']) ? $_SESSION['connected-user'] : null,
-            'contact' => Helper::getContact()
+            'contact' => Helper::getContact(),
+            'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
     public function contactAction()
     {
+        if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
+        {
+            echo "Attaque csrf";
+            header('Location: /signIn');
+            return;
+        }
         $mail = new PHPMailer(true);
         $mail->isSMTP();                                        //Send using SMTP
         $mail->Host       = getenv('MAILER_SERVER');                     //Set the SMTP server to send through

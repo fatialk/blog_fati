@@ -7,27 +7,28 @@
 			<h2 class="title-admin-form">Modifier l'article</h2>
 			<hr class="tm-hr-primary tm-mb-45">
 			<form action="/posts/update" enctype="multipart/form-data" method="post" class="mb-5 tm-comment-form">
+				<input type="hidden" name="csrf_token" value="{{csrf_token}}"/>
 				<div id="hidden" class="mb-4">
 					<input class="form-control" name="id" type="hidden" value="{{post.id}}">
 				</div>
 				<label for="title">Titre</label>
 				<div class="mb-4">
-					<textarea class="form-control" name="title" rows="6">{{post.title}}</textarea>
+					<textarea class="form-control" name="title" rows="6" required>{{post.title}}</textarea>
 				</div>
 				<div class="field">
 					<label for="image">Image</label>
 					<div class="sec-2">
 						<img src="/public/assets/Upload/Post/{{post.id}}." alt="" width="100" height="100">
-						<input type="file" id="image" name="image" accept="image/png, image/jpeg"/>
+						<input type="file" id="image" name="image" accept="image/png, image/jpeg" required/>
 					</div>
 				</div>
 				<label for="chapo">Chapo</label>
 				<div class="mb-4">
-					<textarea class="form-control" name="chapo" rows="6">{{post.chapo}}</textarea>
+					<textarea class="form-control" name="chapo" rows="6" required>{{post.chapo}}</textarea>
 				</div>
 				<label for="description">Description</label>
 				<div class="mb-4">
-					<textarea class="form-control" name="description" rows="6">{{post.description}}</textarea>
+					<textarea class="form-control" name="description" rows="6" required>{{post.description}}</textarea>
 				</div>
 				<div class="text-right">
 					<button class="tm-btn tm-btn-primary tm-btn-small">Envoyer</button>

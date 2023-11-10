@@ -37,7 +37,6 @@
 						</div>
 						<!-- Comments -->
 						<div>
-							<!-- <h2 class="tm-color-primary tm-post-title">Comments</h2> -->
 							<hr
 							class="tm-hr-primary tm-mb-45">
 							<!-- Ici boucle comments -->
@@ -54,7 +53,7 @@
 										</p>
 										<div class="d-flex justify-content-between">
 											<span class="tm-color-primary">a répondu le
-												{{comment.created_at}}</span>
+												{{comment.createdAt}}</span>
 										</div>
 									</div>
 								</div>
@@ -63,12 +62,13 @@
 							<!-- Ici fin boucle comments -->
 							{% if userConnected is not empty %}
 								<form action="/comments/create" method="post" class="mb-5 tm-comment-form">
+									<input type="hidden" name="csrf_token" value="{{csrf_token}}"/>
 									<h2 class="tm-color-primary tm-post-title mb-4">Ajouter un commentaire</h2>
 									<div class="mb-4">
 										<input class="form-control" name="post_id" type="hidden" value="{{post.id}}">
 									</div>
 									<div class="mb-4">
-										<textarea class="form-control" name="description" rows="6"></textarea>
+										<textarea class="form-control" name="description" rows="6" required></textarea>
 									</div>
 									<div class="text-right">
 										<button class="tm-btn tm-btn-primary tm-btn-small">Envoyer</button>

@@ -26,14 +26,15 @@
 		<div class="container contact">
 			<h1>Me contacter</h1>
 			<form action="/contact" method="post">
+			    <input type="hidden" name="csrf_token" value="{{csrf_token}}"/>
 				<label for="name">Nom & prénom</label>
-				<input type="text" id="fname" name="name" placeholder="Votre nom et prénom">
+				<input type="text" id="fname" name="name" placeholder="Votre nom et prénom" required>
 				<label for="subject">Sujet</label>
-				<input type="text" id="sujet" name="subject" placeholder="L'objet de votre message">
+				<input type="text" id="sujet" name="subject" placeholder="L'objet de votre message" required>
 				<label for="email">Email</label>
-				<input id="emailAddress" type="email" name="email" placeholder="Votre email">
+				<input id="emailAddress" type="email" name="email" placeholder="Votre email" required>
 				<label for="message">Message</label>
-				<textarea id="message" name="message" placeholder="Votre message" style="height:200px"></textarea>
+				<textarea id="message" name="message" placeholder="Votre message" style="height:200px" required></textarea>
 				<input type="submit" value="Envoyer">
 				{% if contact is not empty %}
 					<span>{{contact.message}}</span>

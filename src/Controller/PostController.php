@@ -22,10 +22,12 @@ class PostController{
         }
         $loader = new FilesystemLoader(__DIR__.$this->viewDir);
         $twig = new Environment($loader);
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
         echo $twig->render('ListPostView.html.twig', [
             'userConnected'=> isset($_SESSION['connected-user']) ? $_SESSION['connected-user'] : null,
             'posts' => $posts,
-            'contact' => Helper::getContact()
+            'contact' => Helper::getContact(),
+            'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
     public function getOneAction(int $id)
@@ -42,21 +44,31 @@ class PostController{
         $userPost = $userRepository->getOneUserById($post->getUserId());
         $loader = new FilesystemLoader(__DIR__.$this->viewDir);
         $twig = new Environment($loader);
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
         echo $twig->render('onePostView.html.twig', [
             'userConnected'=> isset($_SESSION['connected-user']) ? $_SESSION['connected-user'] : null,
             'user'  => $userPost,
             'comments' => $comments,
             'post' => $post,
-            'contact' => Helper::getContact()
+            'contact' => Helper::getContact(),
+            'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
     public function createPostAction()
     {
+        if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
+        {
+            echo "Attaque csrf";
+            header('Location: /signIn');
+            return;
+        }
         if(!isset($_POST['title'], $_FILES['image'], $_POST['description'], $_POST['chapo'])) {
             header('Location: /home');
+            return;
         }
         if(empty($_FILES['image']) || empty($_POST['title']) || empty($_POST['description']) || empty($_POST['chapo'])) {
             header('Location: /home');
+            return;
         }
         $postRepository = new PostRepository();
         $user = $_SESSION['connected-user'];
@@ -73,6 +85,16 @@ class PostController{
     }
     public function updatePostAction()
     {
+        if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
+        {
+            echo "Attaque csrf";
+            header('Location: /signIn');
+            return;
+        }
+        if(empty($_FILES['image']) || empty($_POST['title']) || empty($_POST['description']) || empty($_POST['chapo'])) {
+            header('Location: /home');
+            return;
+        }
         $postId = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
         Helper::moveUploadedFile(filter_var($postId, FILTER_SANITIZE_NUMBER_INT), 'image', $this->uploadDir);
         $postRepository = new PostRepository();
@@ -89,6 +111,11 @@ class PostController{
     }
     public function deletePostAction(int $id)
     {
+        if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
+        {
+            echo "Attaque csrf";
+            header('Location: /signIn');
+        }
         $postRepository = new PostRepository();
         $postRepository->deletePost($id);
         header('Location: /posts/list');

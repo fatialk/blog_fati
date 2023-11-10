@@ -21,6 +21,7 @@
 								{{user.email}}
 							</p>
 							<form action="/admin/users/approve" method="post">
+								<input type="hidden" name="csrf_token" value="{{csrf_token}}"/>
 								<input class="form-control" name="id" type="hidden" value="{{user.id}}">
 								<input type="submit" value="Valider">
 							</form>

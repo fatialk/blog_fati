@@ -29,27 +29,28 @@ class UserController
     {
         $loader = new FilesystemLoader(__DIR__ . $this->viewDir);
         $twig = new Environment($loader);
-        $nonce = random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
-        $_SESSION['nonce']=bin2hex($nonce);
-        // $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
         echo $twig->render('Register.html.twig', [
-            'nonce' => $_SESSION['nonce']
+            'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
     public function createUserAction()
     {
-        if (!hash_equals($_SESSION['nonce'], $_POST['nonce']))
+        if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
         {
             echo "Attaque csrf";
-            header('Location: /register');
+            header('Location: /signIn');
+            return;
         }
         if (!isset($_POST['password'], $_POST['confirm-password']) || $_POST['password'] !== $_POST['confirm-password']) {
             echo "les données renseignées sont invalides";
             header('Location: /register');
+            return;
         }
         if (empty($_POST['name']) || empty($_POST['email'])) {
             echo "les données renseignées sont invalides";
             header('Location: /register');
+            return;
         }
         $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $userRepository = new UserRepository();
@@ -71,6 +72,7 @@ class UserController
         {
             echo "Attaque csrf";
             header('Location: /signIn');
+            return;
         }
         $userRepository = new UserRepository();
         $anonymous = new User();

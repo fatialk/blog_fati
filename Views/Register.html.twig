@@ -16,36 +16,36 @@
 				</div>
 			</div>
 			<form class="register-form" action="/users/create" enctype="multipart/form-data" method="post">
-				<input type="hidden" name="nonce" value="{{nonce}}"/>
+				<input type="hidden" name="csrf_token" value="{{csrf_token}}"/>
 				<div class="screen-1">
 					<div class="field">
 						<label for="name">Nom et prénom</label>
 						<div class="username">
-							<input class="form-control" type="name" name="name" id="email" placeholder="exemple: Joe Terrier"/>
+							<input class="form-control" type="name" name="name" placeholder="exemple: Joe Terrier" required/>
 						</div>
 					</div>
 					<div class="field">
 						<label for="avatar">Avatar</label>
 						<div class="sec-2">
-							<input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg"/>
+							<input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" required/>
 						</div>
 					</div>
 					<div class="field">
 						<label for="email">Email</label>
 						<div class="sec-2">
-							<input class="form-control" type="text" name="email" id="email" placeholder="user@e-mail.com"/>
+							<input class="form-control" type="email" name="email" placeholder="user@e-mail.com" required/>
 						</div>
 					</div>
 					<div class="field">
 						<label for="password">Mot de passe</label>
 						<div class="sec-2">
-							<input class="form-control" type="password" name="password" id="password" placeholder="********"/>
+							<input class="form-control" type="password" name="password" id="password" placeholder="********" required/>
 						</div>
 					</div>
 					<div class="field">
 						<label for="confirm-password">Confirmer le mot de passe</label>
 						<div class="sec-2">
-							<input class="form-control" type="password" name="confirm-password" id="confirm-password" placeholder="********"/>
+							<input class="form-control" type="password" name="confirm-password" id="confirm-password" placeholder="********" required/>
 						</div>
 					</div>
 					<button class="login">Créer mon compte</button>
