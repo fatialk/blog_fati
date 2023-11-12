@@ -2,6 +2,10 @@
 namespace App\Repository;
 use App\Entity\Comment;
 class CommentRepository extends Database {
+     /**
+    * la méthode getCommentsByPostId récupère les commentaires
+    * approuvés d'un seul article.
+    */
      public function getCommentsByPostId(int $postId, int $approved)
      {
           $this->connect();

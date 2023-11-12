@@ -7,10 +7,16 @@ use App\Repository\CommentRepository;
 use App\Helper\Helper;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
+/**
+* UserController est le controller de l'espace utilisateur.
+*/
 class UserController
 {
     private string $viewDir = '/../../views/';
     private string $uploadDir = '../../public/assets/Upload/User/';
+    /**
+    * la méthode getListAction affiche la vue qui permet à l'utilisateur de se connecter à son compte.
+    */
     public function signInAction()
     {
         $loader = new FilesystemLoader(__DIR__ . $this->viewDir);
@@ -20,11 +26,17 @@ class UserController
             'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
+    /**
+    * la méthode signOutAction supprime la session de l'utilisateur et le déconnecte.
+    */
     public function signOutAction()
     {
         session_destroy();
         header('location: /signIn');
     }
+    /**
+    * la méthode registerAction affiche la vue qui permet à l'utilisateur de créer un compte.
+    */
     public function registerAction()
     {
         $loader = new FilesystemLoader(__DIR__ . $this->viewDir);
@@ -34,6 +46,9 @@ class UserController
             'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
+    /**
+    * la méthode createUserAction ajoute un utilisateur.
+    */
     public function createUserAction()
     {
         if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
@@ -64,8 +79,8 @@ class UserController
         header('Location: /signIn');
     }
     /**
-     * vérifier si l'email et mdp sont correctes
-     */
+    * la méthode authAction vérifie l'authenticité de l'utilisateur.
+    */
     public function authAction()
     {
         if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))

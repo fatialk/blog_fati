@@ -6,19 +6,28 @@ use App\Repository\UserRepository;
 use App\Helper\Helper;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
+/**
+* AdminControlle est le controller de l'espace admin.
+*/
 class AdminController{
     private string $viewDir = __DIR__.'/../../views/';
+    /**
+    * la méthode postCreateViewAction affiche la vue de création d'un article.
+    */
     public function postCreateViewAction()
     {
         $loader = new FilesystemLoader($this->viewDir);
         $twig = new Environment($loader);
         $_SESSION['csrf_token'] = bin2hex(random_bytes(16));
         echo $twig->render('createPost.html.twig', [
-                'userConnected'=> isset($_SESSION['connected-user']) ? $_SESSION['connected-user'] : null,
-                'contact' => Helper::getContact(),
-                'csrf_token' => $_SESSION['csrf_token']
+            'userConnected'=> isset($_SESSION['connected-user']) ? $_SESSION['connected-user'] : null,
+            'contact' => Helper::getContact(),
+            'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
+    /**
+    * la méthode postEditViewAction affiche la vue de modification d'un article.
+    */
     public function postEditViewAction(int $id)
     {
         $loader = new FilesystemLoader($this->viewDir);
@@ -33,6 +42,9 @@ class AdminController{
             'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
+    /**
+    * la méthode viewCommentsAction affiche la vue d'approbation des commentaires.
+    */
     public function viewCommentsAction()
     {
         $loader = new FilesystemLoader($this->viewDir);
@@ -51,7 +63,10 @@ class AdminController{
             'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
-     public function approveCommentAction()
+    /**
+    * la méthode approveCommentAction permet d'approuver les commentaires.
+    */
+    public function approveCommentAction()
     {
         if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
         {
@@ -64,6 +79,9 @@ class AdminController{
         $commentRepository->approveComment($id);
         header('Location: /admin/comments/list/view');
     }
+    /**
+    * la méthode viewUsersAction affiche la vue d'approbation des utilisateurs.
+    */
     public function viewUsersAction()
     {
         $loader = new FilesystemLoader($this->viewDir);
@@ -78,7 +96,10 @@ class AdminController{
             'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
-     public function approveUserAction()
+    /**
+    * la méthode approveUserAction permet d'approuver les utilisateurs.Les utilisateurs approuvés ont ainsi les mêmes droits que les administrateurs
+    */
+    public function approveUserAction()
     {
         if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
         {

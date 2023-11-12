@@ -2,7 +2,13 @@
 namespace App\Controller;
 use App\Entity\Comment;
 use App\Repository\CommentRepository;
+/**
+* AdminControlle est le controller de l'espace commentaire.
+*/
 class CommentController{
+    /**
+    * la méthode createCommentAction ajoute un comentaire. la vue est affichée dans le PostController.
+    */
     public function createCommentAction() {
         if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
         {

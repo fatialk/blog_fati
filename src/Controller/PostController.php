@@ -7,9 +7,15 @@ use App\Repository\CommentRepository;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 use App\Helper\Helper;
+/**
+* PostController est le controller de l'espace articles.
+*/
 class PostController{
     private string $uploadDir = '../../public/assets/Upload/Post/';
     private string $viewDir = '/../../views/';
+    /**
+    * la méthode getListAction affiche la liste de tous les articles créés.
+    */
     public function getListAction()
     {
         $userRepository = new UserRepository();
@@ -30,6 +36,9 @@ class PostController{
             'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
+    /**
+    * la méthode getOneAction affiche un seul article et ses commentaires approuvés.
+    */
     public function getOneAction(int $id)
     {
         $postRepository = new PostRepository();
@@ -54,6 +63,9 @@ class PostController{
             'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
+    /**
+    * la méthode createPostAction ajoute un article.
+    */
     public function createPostAction()
     {
         if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
@@ -83,6 +95,9 @@ class PostController{
         Helper::moveUploadedFile($postId, 'image', $this->uploadDir);
         header('Location: /posts/list');
     }
+    /**
+    * la méthode updatePostAction modifie un article.
+    */
     public function updatePostAction()
     {
         if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
@@ -109,13 +124,11 @@ class PostController{
         $postRepository->updatePost($post);
         header('Location: /posts/list');
     }
+    /**
+    * la méthode deletePostAction supprime un article.
+    */
     public function deletePostAction(int $id)
     {
-        if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
-        {
-            echo "Attaque csrf";
-            header('Location: /signIn');
-        }
         $postRepository = new PostRepository();
         $postRepository->deletePost($id);
         header('Location: /posts/list');

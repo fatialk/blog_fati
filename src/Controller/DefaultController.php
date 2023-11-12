@@ -4,9 +4,15 @@ use App\Helper\Helper;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 use PHPMailer\PHPMailer\PHPMailer;
+/**
+* DefaultController est le controller de l'espace public commun.
+*/
 class DefaultController
 {
     private string $viewDir = '/../../views/';
+    /**
+    * la méthode homeAction affiche la vue Accueil.
+    */
     public function homeAction()
     {
         $loader = new FilesystemLoader(__DIR__ . $this->viewDir);
@@ -18,6 +24,9 @@ class DefaultController
             'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
+    /**
+    * la méthode portfolioAction affiche la vue Portfolio.
+    */
     public function portfolioAction()
     {
         $loader = new FilesystemLoader(__DIR__ . $this->viewDir);
@@ -29,6 +38,9 @@ class DefaultController
             'csrf_token' => $_SESSION['csrf_token']
         ]);
     }
+    /**
+    * la méthode contactAction utilise PHPMailer pour envoyer un message de contact à une adresse email.
+    */
     public function contactAction()
     {
         if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token']))
@@ -46,8 +58,8 @@ class DefaultController
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;     //Enable implicit TLS encryption
         $mail->Port       = 587;                                //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
         //Recipients
-        $mail->setFrom('elachri.fz@alkhalloufi.fr', 'Contact-Blog-fati');    //Set email of the sender
-        $mail->addAddress('elachri.fz@gmail.com', 'fatima');                 //Set email of destination
+        $mail->setFrom(getenv('MAILER_USERNAME'), 'Contact');    //Set email of the sender
+        $mail->addAddress(getenv('MAILER_ADDRESS_RECEIVER'));                 //Set email of destination
         //Content                                               //Set email format to HTML
         $mail->isHTML(true);
         $mail->Subject = filter_var($_POST['subject'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
